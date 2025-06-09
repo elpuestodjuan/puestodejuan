@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>El puesto de Juan - Frutas y Verduras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts y Font Awesome -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
+  <style>
+    html { scroll-behavior: smooth; font-size: 17px;}
+    body {
+      background: linear-gradient(135deg, #fffbe6 0%, #ffe5c5 100%);
+      color: #353535;
+      font-family: 'Open Sans', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      font-size: 1.06em;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fe7d23;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      text-decoration: none;
+    }
+    h1 { font-size: 1.75em;}
+    h2 { font-size: 1.33em;}
+    h3 { font-size: 1.1em;}
+    h4, h5, h6 { font-size: 1em; }
+    p, ul, li, label, .producto-card p, .ventaja-card p, .contact-info, .contact-form, .contact-form label, .contact-form input, .contact-form textarea {
+      text-align: center;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 1em;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .precio {
+      font-weight: bold;
+      color: #14c97c;
+      font-size: 1.08em;
+      margin-bottom: 0.3em;
+      margin-top: 0.25em;
+      display: block;
+      text-align: center;
+    }
+    nav {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #ffe5c5;
+      width: 100%;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      min-height: 0;
+    }
+    .navbar-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5em;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      min-height: 54px;
+      position: relative;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+      margin-left: -35px;
+    }
+    .logo-sobresale {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 2px 8px #ffc07f80;
+      border: 3px solid #fffbe6;
+      background: #fffbe6;
+      position: absolute;
+      top: 18px;
+      left: -35px;
+      z-index: 10;
+    }
+    .navbar-title {
+      margin-left: 120px;
+      font-family: 'Rye', cursive, 'Montserrat', Arial, sans-serif;
+      color: #fe7d23;
+      font-size: 1.45em;
+      font-weight: 700;
+      margin-top: 0.8em;
+      letter-spacing: 1px;
+      text-align: left;
+      text-shadow: 2px 2px 0 #fffbe6, 0 2px 8px #ffb96e80;
+    }
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.1em;
+      margin: 0;
+      padding: 0;
+      margin-top: 1.1em;
+    }
+    .navbar-menu li {
+      position: relative;
+    }
+    .navbar-menu a {
+      color: #fe7d23;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 0.3em 1em;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: background .2s, color .2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .navbar-menu a.active, .navbar-menu a:hover {
+      background: #14c97c;
+      color: #fff;
+      box-shadow: 0 1px 6px #ffb96e40;
+    }
+    .navbar-toggle {
+      display: none;
+      cursor: pointer;
+      color: #fe7d23;
+      font-size: 2em;
+      background: none;
+      border: none;
+      margin-top: 0;
+    }
+    @media (max-width: 950px) {
+      .navbar-container {
+        width: 98vw;
+        min-width: 0;
+        max-width: 100vw;
+        padding: 0 0.3em;
+      }
+      .navbar-menu {
+        flex-direction: column;
+        gap: 0;
+        display: none;
+        background: #fff;
+        margin-top: 0.5em;
+        border-radius: 8px;
+      }
+      .navbar-menu.open { display: flex; }
+      .navbar-toggle { display: block; align-self: flex-end; margin-top: -2.2em; }
+      .navbar-title { margin-left: 75px; }
+      .logo-sobresale { width: 65px; height: 65px; top: 10px; left: -22px;}
+      .navbar-logo { margin-left: -22px; }
+    }
+    @media (max-width:500px) {
+      .navbar-logo img.logo-sobresale { width: 56px; height: 56px; top: 18px; left: -12px;}
+      .navbar-title { font-size: 0.95em; margin-left: 60px;}
+      .navbar-logo { margin-left: -12px; }
+    }
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 2em 1em 1em 1em;
+    }
+    section {
+      padding: 48px 0 30px 0;
+      min-height: 220px;
+    }
+    .hero-image {
+      width: 100%;
+      max-width: 700px;
+      display: block;
+      margin: 2em auto 0 auto;
+      border-radius: 22px;
+      box-shadow: 0 2px 22px #ffc07f40;
+      object-fit: cover;
+    }
+    .productos-grid {
+      display: flex; flex-wrap: wrap; gap: 2em; justify-content: center;
+    }
+    .producto-card {
+      width: 220px;
+      min-width: 150px;
+      border: 2px solid #ffd492;
+      border-radius: 15px;
+      padding: 1em;
+      background: #fffbe6;
+      box-shadow: 0 2px 12px #ffb96e20;
+      display: flex; flex-direction: column; align-items: center;
+      transition: box-shadow .18s, transform .18s;
+      position: relative;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .producto-card img {
+      width: 100%;
+      height: 125px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 0.7em;
+      transition: transform .2s;
+      box-shadow: 0 2px 12px #ffd49260;
+    }
+    .producto-card:hover {
+      box-shadow: 0 8px 32px #ffb96e40;
+      transform: translateY(-3px) scale(1.03);
+      border-color: #14c97c;
+    }
+    .producto-card h3 {
+      margin: 0.3em 0 0.2em 0;
+      font-size: 1em;
+      color: #fd9644;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+    }
+    .producto-card p, .producto-card ul {
+      font-family: 'Open Sans', Arial, sans-serif;
+      color: #444;
+      font-size: 0.97em;
+      text-align: center;
+      text-decoration: none;
+    }
+    .producto-card ul {
+      margin: 0.2em 0 0.5em 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .producto-card .agregar-btn {
+      margin-top: 0.4em;
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.45em 1em;
+      cursor: pointer;
+      font-size: 0.97em;
+      transition: background .18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      box-shadow: 0 1px 8px #ffb96e40;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .producto-card .agregar-btn[disabled] { opacity: 0.6; cursor: not-allowed; background: #aaa; }
+    .producto-card .agregar-btn:hover:enabled {
+      background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);
+    }
+    .ventajas-grid {
+      display: flex; gap: 2em; flex-wrap: wrap; justify-content: center;
+      margin-top: 1.2em;
+    }
+    .ventaja-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px #ffb96e21;
+      border: 2px solid #ffe1b3;
+      padding: 1.3em 1em;
+      flex: 1 1 210px;
+      display: flex; flex-direction: column; align-items: center;
+      max-width: 310px;
+      min-width: 150px;
+      margin-bottom: 1em;
+      transition: box-shadow .18s, transform .18s;
+      text-align: center;
+    }
+    .ventaja-card img {
+      width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 0.7em; border: 2px solid #ffe1b3;
+      background: #fffbe6;
+      box-shadow: 0 1px 6px #ffb96e20;
+    }
+    .ventaja-card h4 {
+      margin: 0.5em 0 0.2em 0;
+      color: #fe7d23;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1em;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+    }
+    .ventaja-card p { font-size: 0.97em; color: #444; font-family: 'Open Sans', Arial, sans-serif; text-align: center;}
+    .ventaja-card:hover {
+      box-shadow: 0 8px 32px #14c97c40;
+      transform: translateY(-3px) scale(1.03);
+      border-color: #14c97c;
+    }
+    .contact-row { display: flex; gap: 2em; flex-wrap: wrap; justify-content: center; }
+    .contact-form, .contact-info {
+      background: #fffbe6;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ffd49240;
+      padding: 1.2em;
+      flex: 1 1 320px;
+      min-width: 200px;
+      border: 2px solid #ffe0b4;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .contact-form label { font-weight: 700; color:#fd9644; text-align: center;}
+    .contact-form input, .contact-form textarea {
+      width: 95%; padding: 0.5em; border-radius: 7px; border: 1.5px solid #ffd492; margin-bottom: 1em; font-size: 1em;
+      background: #fff;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+    .contact-form button {
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color: #fff; border: none; padding: 0.6em 1.3em; border-radius: 7px; font-size: 1em; cursor: pointer;
+      transition: background .18s;
+      font-weight: 700;
+    }
+    .contact-form button:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
+    .contact-info ul { list-style: none; padding: 0; margin: 0; }
+    .contact-info li { margin: 0.8em 0; font-size: 1em;}
+    .contact-info i { color: #14c97c; margin-right: 0.45em;}
+    .contact-info a { font-weight: bold;}
+    footer { text-align: center; padding: 2em 0 1.2em 0; color: #fd9644; font-size: 1.03em; background: #fffbe6; font-family: 'Montserrat', Arial, sans-serif; font-weight: 700;}
+    @media (max-width: 1050px) { .container { max-width: 98vw;} }
+    @media (max-width: 950px) {
+      .productos-grid, .ventajas-grid, .contact-row { flex-direction: column; align-items: center;}
+      .producto-card, .ventaja-card { width: 96%; max-width: 340px; }
+    }
+    @media (max-width: 500px) {
+      .navbar-logo img.logo-sobresale { width: 56px; height: 56px; top: 18px; left: -12px;}
+      .navbar-title { font-size: 0.95em; margin-left: 60px;}
+      .producto-card, .ventaja-card { min-width: 96vw; }
+      .contact-form, .contact-info { padding: 1em;}
+      h1 { font-size: 1em;}
+      h2 { font-size: 0.95em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=140&q=80" alt="Logo El puesto de Juan" class="logo-sobresale">
+        <span class="navbar-title">El puesto de Juan</span>
+      </div>
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Abrir menú">
+        <i class="fa fa-bars"></i>
+      </button>
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
+        <li><a href="#productos">Listado</a></li>
+        <li><a href="#ventajas">Ventajas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <!-- HERO -->
+    <section id="inicio">
+      <h1>Frutas y verduras frescas y de temporada</h1>
+      <p style="font-size:1.05em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
+        Somos productores en Canelones. Entregamos frutas y verduras recién cosechadas, sin intermediarios, directo a tu mesa.<br>
+        <b>Técnicas ecológicas</b> y abonos naturales. Pagás al recibir. <span style="color:#45B113;font-weight:600;">Envío gratis</span> por pedidos mayores a $800.
+      </p>
+      <img class="hero-image" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Frutas y verduras frescas">
+    </section>
+    <!-- LISTADO -->
+    <section id="productos">
+      <h2>Listado de productos</h2>
+      <div class="productos-grid" id="productos-lista">
+        <div>Cargando productos...</div>
+      </div>
+    </section>
+    <!-- VENTAJAS -->
+    <section id="ventajas">
+      <h2>Ventajas de comprar directo</h2>
+      <div class="ventajas-grid">
+        <div class="ventaja-card">
+          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3cd7?auto=format&fit=crop&w=140&q=80" alt="Frescura">
+          <h4>Frescura garantizada</h4>
+          <p>Cosechamos y entregamos en menos de 24hs. Sin cámaras ni conservantes.</p>
+        </div>
+        <div class="ventaja-card">
+          <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=140&q=80" alt="Ecológico">
+          <h4>Ecológico</h4>
+          <p>Uso responsable del suelo, fertilizantes orgánicos y control natural de plagas.</p>
+        </div>
+        <div class="ventaja-card">
+          <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=140&q=80" alt="Precio justo">
+          <h4>Precio justo</h4>
+          <p>Sin intermediarios. Mejor precio para vos y para el productor.</p>
+        </div>
+        <div class="ventaja-card">
+          <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=140&q=80" alt="Variedad">
+          <h4>Variedad de temporada</h4>
+          <p>Frutas y verduras de estación, directo del campo a tu mesa.</p>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <div class="contact-row">
+        <div class="contact-info">
+          <ul>
+            <li><i class="fa fa-map-marker-alt"></i> Canelones, Uruguay</li>
+            <li><i class="fa fa-phone"></i> <a href="tel:099999999">099 999 999</a></li>
+            <li><i class="fa fa-envelope"></i> <a href="mailto:info@elpuestodejuan.com">info@elpuestodejuan.com</a></li>
+            <li><i class="fab fa-facebook-square"></i> <a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener">Directo de la Chacra</a></li>
+          </ul>
+        </div>
+        <form class="contact-form">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" rows="3" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <footer>
+    &copy; 2025 El puesto de Juan. Todos los derechos reservados.
+  </footer>
+  <script>
+    // ----------- NAVBAR MOBILE -----------
+    document.getElementById('navbarToggle').onclick = function() {
+      document.getElementById('navbarMenu').classList.toggle('open');
+    };
+    const links = document.querySelectorAll('.navbar-menu a');
+    links.forEach(link => {
+      link.addEventListener('click', function() {
+        links.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        if(window.innerWidth < 950) {
+          document.getElementById('navbarMenu').classList.remove('open');
+        }
+      });
+    });
+
+    // ----------- FORM CONTACTO -----------
+    document.querySelector('.contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('¡Gracias por tu mensaje! Te responderemos pronto.');
+      this.reset();
+    });
+
+    // ----------- PRODUCTOS DINÁMICOS DESDE SHEETS -----------
+    // REEMPLAZA esta URL por la que te da Sheet.best para tu planilla:
+    const SHEET_BEST_URL = "https://sheet.best/api/sheets/1d0d98b5-8f2f-4e9c-8dfe-1f4cf8c7c0e6"; // <-- pon la tuya
+
+    fetch(SHEET_BEST_URL)
+      .then(res => res.json())
+      .then(productos => {
+        const contenedor = document.getElementById('productos-lista');
+        contenedor.innerHTML = '';
+        productos.filter(p => (p.activo || '').trim().toLowerCase() === "sí")
+          .forEach(p => {
+            contenedor.innerHTML += `
+              <div class="producto-card">
+                <img src="${p.imagen}" alt="${p.nombre}">
+                <h3>${p.nombre}</h3>
+                <span class="precio">$${p.precio}${p.stock && p.stock.trim() !== "" ? ` - Stock: ${p.stock}` : ""}</span>
+                <button class="agregar-btn" ${parseInt(p.stock) < 1 ? "disabled" : ""}>
+                  <i class="fa fa-cart-plus"></i>${parseInt(p.stock) < 1 ? "Sin stock" : "Agregar"}
+                </button>
+              </div>
+            `;
+          });
+        if (contenedor.innerHTML.trim() === '') {
+          contenedor.innerHTML = '<div>No hay productos activos en este momento.</div>';
+        }
+      })
+      .catch(() => {
+        document.getElementById('productos-lista').innerHTML = '<div style="color:red;">No se pudieron cargar los productos. Intenta más tarde.</div>';
+      });
+  </script>
+</body>
+</html>
