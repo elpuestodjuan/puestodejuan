@@ -461,9 +461,10 @@
         contenedor.innerHTML = '';
         productos.filter(p => (p.activo || '').trim().toLowerCase() === "sí")
           .forEach(p => {
+            // Ajuste: Carga fotos desde la carpeta img/ usando el nombre del producto en minúsculas
             contenedor.innerHTML += `
               <div class="producto-card">
-                <img src="${p.imagen}" alt="${p.nombre}">
+                <img src="img/${p.nombre.toLowerCase()}.png" alt="${p.nombre}">
                 <h3>${p.nombre}</h3>
                 <span class="precio">$${p.precio}${p.stock && p.stock.trim() !== "" ? ` - Stock: ${p.stock}` : ""}</span>
                 <button class="agregar-btn" ${parseInt(p.stock) < 1 ? "disabled" : ""}>
