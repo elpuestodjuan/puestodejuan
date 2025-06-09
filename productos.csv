@@ -1,0 +1,15 @@
+Imagen,Producto,Precio,Foto,Stock,Comentarios
+=IMAGE("https://images.unsplash.com/photo-1465101178521-c1a9136a3764?auto=format&fit=crop&w=400"),Frutillas,$180,https://images.unsplash.com/photo-1465101178521-c1a9136a3764?auto=format&fit=crop&w=400,40,Frescas y dulces
+=IMAGE("https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400"),Bananas,$150,https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400,50,Muy maduras
+=IMAGE("https://images.unsplash.com/photo-1470688090067-6d429c0b2602?auto=format&fit=crop&w=400"),Manzanas,$120,https://images.unsplash.com/photo-1470688090067-6d429c0b2602?auto=format&fit=crop&w=400,35,Verdes y rojas surtidas
+=IMAGE("https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400"),Naranjas,$110,https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400,60,Ideales para jugo
+=IMAGE("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=400"),Peras,$130,https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=400,30,Jugosas
+=IMAGE("https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400"),Duraznos,$160,https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400,25,De estación
+=IMAGE("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400"),Tomates,$90,https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400,70,Perfectos para ensalada
+=IMAGE("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400"),Lechuga,$60,https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400,55,Rizada fresca
+=IMAGE("https://images.unsplash.com/photo-1447078806655-40579c2520d6?auto=format&fit=crop&w=400"),Zanahorias,$80,https://images.unsplash.com/photo-1447078806655-40579c2520d6?auto=format&fit=crop&w=400,80,Gruesas
+=IMAGE("https://images.unsplash.com/photo-1459411621453-7b039c0ecae2?auto=format&fit=crop&w=400"),Papas,$65,https://images.unsplash.com/photo-1459411621453-7b039c0ecae2?auto=format&fit=crop&w=400,100,Ideal para puré
+=IMAGE("https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400"),Boniatos,$75,https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400,40,Para el horno
+=IMAGE("https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400"),Pimientos,$100,https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400,28,Rojos y verdes
+=IMAGE("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=400"),Acelga,$55,https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=400,33,De la huerta
+=IMAGE("https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=400"),Berenjenas,$95,https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=400,36,Para milanesa
