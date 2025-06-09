@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>El puesto de Juan - Frutas y Verduras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Montserrat, Open Sans y Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
+  <style>
+    html {
+      scroll-behavior: smooth;
+      font-size: 17px;
+      box-sizing: border-box;
+    }
+    *, *:before, *:after { box-sizing: inherit; }
+
+    body {
+      background: linear-gradient(135deg, #fffbe6 0%, #ffe5c5 100%);
+      color: #353535;
+      font-family: 'Open Sans', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      font-size: 1.06em;
+    }
+    /* NAVBAR */
+    nav {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #ffe5c5;
+      width: 100%;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      min-height: 0;
+    }
+    .navbar-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 54px;
+      position: relative; /* Necesario para el indicador */
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-left: 0;
+    }
+    .logo-sobresale {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 2px 8px #ffc07f80;
+      border: 3px solid #fffbe6;
+      background: #fffbe6;
+      margin-right: 15px;
+      transition: width .2s, height .2s;
+    }
+    .navbar-title {
+      font-family: 'Rye', cursive, 'Montserrat', Arial, sans-serif;
+      color: #fe7d23;
+      font-size: 1.3em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: left;
+      text-shadow: 2px 2px 0 #fffbe6, 0 2px 8px #ffb96e80;
+      margin-left: 0;
+    }
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.1em;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      transition: max-height .3s;
+      position: relative;
+      z-index: 20;
+    }
+    .navbar-menu li {
+      position: relative;
+    }
+    .navbar-menu a {
+      color: #fe7d23;
+      font-size: 1em;
+      font-weight: 700;
+      padding: 0.5em 1.2em;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: background .2s, color .2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1;
+      position: relative;
+      z-index: 21;
+    }
+    .navbar-menu a.active, .navbar-menu a:hover {
+      background: #14c97c;
+      color: #fff;
+      box-shadow: 0 1px 6px #ffb96e40;
+    }
+    .navbar-toggle {
+      display: none;
+      cursor: pointer;
+      color: #fe7d23;
+      font-size: 2em;
+      background: none;
+      border: none;
+      margin-left: 0.5em;
+    }
+    /* INDICADOR ANIMADO */
+    .navbar-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      width: 0;
+      background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);
+      border-radius: 2px;
+      transition: all 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+      z-index: 10;
+      pointer-events: none;
+    }
+    @media (max-width: 820px) {
+      .navbar-indicator { display: none; }
+    }
+
+    /* HERO */
+    .hero-titulo {
+      font-family: 'Rye', 'Montserrat', Arial, sans-serif;
+      font-size: 2em;
+      color: #14c97c;
+      text-align: center;
+      margin-bottom: 0.15em;
+      text-shadow: 0 2px 12px #e9ffe7, 1px 1px 0 #fffbe6;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+      display: block;
+      min-height: 1.5em;
+      transition: opacity .5s;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fe7d23;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      text-decoration: none;
+    }
+    h1 { font-size: 1.5em;}
+    h2 { font-size: 1.2em;}
+    h3 { font-size: 1.05em;}
+    h4, h5, h6 { font-size: 1em; }
+    p, ul, li, label, .producto-card p, .ventaja-card p, .contact-info, .contact-form, .contact-form label, .contact-form input, .contact-form textarea {
+      text-align: center;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 1em;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .precio {
+      font-weight: bold;
+      color: #14c97c;
+      font-size: 1.08em;
+      margin-bottom: 0.3em;
+      margin-top: 0.25em;
+      display: block;
+      text-align: center;
+    }
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 1.5em 1em 1em 1em;
+    }
+    section {
+      padding: 32px 0 24px 0;
+      min-height: 180px;
+    }
+    .hero-image {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      display: block;
+      margin: 2em auto 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 2px 22px #ffc07f40;
+      object-fit: cover;
+    }
+    /* PRODUCTOS */
+    .productos-grid {
+      display: flex; flex-wrap: wrap; gap: 1.5em; justify-content: center;
+    }
+    .producto-card {
+      width: 200px;
+      min-width: 140px;
+      border: 2px solid #ffd492;
+      border-radius: 15px;
+      padding: 1em 0.5em 1.1em 0.5em;
+      background: #fffbe6;
+      box-shadow: 0 2px 12px #ffb96e20;
+      display: flex; flex-direction: column; align-items: center;
+      transition: box-shadow .18s, transform .18s;
+      position: relative;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .producto-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 0.7em;
+      transition: transform .2s;
+      box-shadow: 0 2px 12px #ffd49260;
+    }
+    .producto-card h3 {
+      margin: 0.3em 0 0.2em 0;
+      font-size: 1em;
+      color: #fd9644;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+    }
+    .producto-card .agregar-btn {
+      margin-top: 0.4em;
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.45em 1em;
+      cursor: pointer;
+      font-size: 0.97em;
+      transition: background .18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      box-shadow: 0 1px 8px #ffb96e40;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .producto-card .agregar-btn[disabled] { opacity: 0.6; cursor: not-allowed; background: #aaa; }
+    .producto-card .agregar-btn:hover:enabled {
+      background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);
+    }
+    /* VENTAJAS */
+    .ventajas-grid {
+      display: flex; gap: 1.5em; flex-wrap: wrap; justify-content: center;
+      margin-top: 1.2em;
+    }
+    .ventaja-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px #ffb96e21;
+      border: 2px solid #ffe1b3;
+      padding: 1.3em 1em;
+      flex: 1 1 180px;
+      display: flex; flex-direction: column; align-items: center;
+      max-width: 250px;
+      min-width: 130px;
+      margin-bottom: 1em;
+      transition: box-shadow .18s, transform .18s;
+      text-align: center;
+    }
+    .ventaja-card img {
+      width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 0.7em; border: 2px solid #ffe1b3;
+      background: #fffbe6;
+      box-shadow: 0 1px 6px #ffb96e20;
+    }
+    .ventaja-card:hover {
+      box-shadow: 0 8px 32px #14c97c40;
+      transform: translateY(-3px) scale(1.03);
+      border-color: #14c97c;
+    }
+    /* CONTACTO NUEVO */
+    .contact-row { display: flex; gap: 1.5em; flex-wrap: wrap; justify-content: center; }
+    .contact-form {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px #14c97c20;
+      border: 2px solid #ffe0b4;
+      padding: 2em 1.5em 1.5em 1.5em;
+      margin: 0 auto;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: stretch;
+    }
+    .contact-form label {
+      font-weight: 700;
+      color: #fe7d23;
+      margin-bottom: 0.3em;
+      text-align: left;
+      font-family: 'Montserrat', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      border: 1.5px solid #c0dcc0;
+      border-radius: 8px;
+      padding: 0.7em 1em;
+      font-size: 1em;
+      font-family: 'Open Sans', Arial, sans-serif;
+      margin-bottom: 0.4em;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fffbe6;
+      resize: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #14c97c;
+      outline: none;
+      box-shadow: 0 2px 8px #14c97c30;
+    }
+    .contact-form button[type="submit"] {
+      background: linear-gradient(90deg, #fe7d23 70%, #14c97c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8em 1.2em;
+      font-size: 1.1em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      box-shadow: 0 2px 10px #ffd49250;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .contact-form button[type="submit"]:hover {
+      background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);
+      box-shadow: 0 4px 18px #14c97c20;
+    }
+    #contact-status {
+      font-size: 1em;
+      margin-top: 0.7em;
+      text-align: center;
+      min-height: 1.5em;
+      color: #14c97c;
+      font-weight: 700;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .contact-info {
+      background: #fffbe6;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ffd49240;
+      padding: 1.2em;
+      flex: 1 1 320px;
+      min-width: 200px;
+      border: 2px solid #ffe0b4;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    /* FOOTER */
+    footer { text-align: center; padding: 2em 0 1.2em 0; color: #fd9644; font-size: 1.03em; background: #fffbe6; font-family: 'Montserrat', Arial, sans-serif; font-weight: 700;}
+    /* Carrito flotante */
+    #cart-floating-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px #ffb96e40;
+      padding: 0.7em 1.4em;
+      font-size: 1.15em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      cursor: pointer;
+      z-index: 2000;
+      transition: background .2s;
+    }
+    #cart-floating-btn:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
+    #cart-count {
+      background: #fff;
+      color: #fd9644;
+      border-radius: 50%;
+      font-size: 1em;
+      font-weight: bold;
+      padding: 2px 8px;
+      margin-left: 4px;
+      min-width: 22px;
+      text-align: center;
+    }
+    #cart-panel {
+      position: fixed;
+      right: 18px;
+      bottom: 80px;
+      width: 340px;
+      max-height: 70vh;
+      background: #fffbe6;
+      border-radius: 15px;
+      box-shadow: 0 4px 32px #fd964430;
+      padding: 1em 1em 1em 1em;
+      z-index: 2100;
+      display: none;
+      flex-direction: column;
+      animation: cart-fadein .25s;
+      border: 2px solid #ffd492;
+    }
+    @keyframes cart-fadein { from { opacity:0; transform:translateY(35px);} to { opacity:1; transform:translateY(0);} }
+    #cart-panel.open { display: flex; }
+    #cart-panel h4 { margin: 0 0 0.5em 0; font-family: 'Montserrat', Arial, sans-serif; color: #fd9644; font-weight:700;}
+    #cart-list { flex: 1 1 auto; overflow-y: auto; margin-bottom: 1em;}
+    #cart-list .cart-item {
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #ffd492; padding: 0.5em 0;
+      text-align: center;
+    }
+    #cart-list .cart-item:last-child { border-bottom: none;}
+    .cart-item-title { flex: 1 1 auto; margin-right: 0.6em;}
+    .cart-item-qty { font-weight: bold; margin: 0 0.6em;}
+    .cart-item-precio {
+      color: #14c97c;
+      font-size: 0.97em;
+      margin: 0 0.5em;
+      min-width: 54px;
+      display: inline-block;
+      text-align: right;
+    }
+    .cart-item-subtotal {
+      color: #fd9644;
+      font-size: 1em;
+      margin-left: 0.3em;
+      min-width: 64px;
+      display: inline-block;
+      text-align: right;
+    }
+    .cart-item-remove {
+      background: #ffd492; color: #fe7d23; border: none; border-radius: 8px;
+      padding: 0.22em 0.7em; font-size: 1em; cursor: pointer;
+    }
+    .cart-item-controls {
+      display: flex; align-items: center; gap: 0.3em;
+    }
+    .cart-item-controls button {
+      background: #fe7d23; color: #fff; border: none; border-radius: 50%; width: 1.5em; height: 1.5em; font-size: 1em; cursor: pointer;
+      font-weight:bold; transition: background .15s;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .cart-item-controls button:hover { background: #14c97c;}
+    #cart-total-row {
+      font-weight: bold; display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1em;
+      font-size: 1em;
+      color: #fd9644;
+    }
+    #cart-panel-close {
+      position: absolute; top: 8px; right: 10px; background: none; border: none;
+      font-size: 1.2em; color: #bbb; cursor: pointer;
+    }
+    #cart-panel-form { border-top: 1px solid #ffd492; margin-top: 1em; padding-top: 1em; display: none; flex-direction: column; gap: 1em;}
+    #cart-panel-form label { font-weight: 600; color: #14c97c;}
+    #cart-panel-form .cart-pay-btn {
+      background: #25d366;
+      color:#fff;
+      padding:0.7em 1.4em;
+      border:none;
+      border-radius:5px;
+      font-size:1em;
+      cursor:pointer;
+      margin-top:0.6em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
+    }
+    #cart-panel-form .cart-pay-btn:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
+    #cart-panel-form .cart-pay-radio { margin-right: 0.5em;}
+    /* ----------- RESPONSIVE ----------- */
+    @media (max-width: 900px) {
+      html { font-size: 16px;}
+      .navbar-container { max-width: 99vw; padding: 0 0.4em; }
+      .container { max-width: 99vw; padding: 1.2em 0.3em;}
+    }
+    @media (max-width: 700px) {
+      html { font-size: 15px;}
+      .navbar-container { padding: 0 0.2em;}
+      .container { padding: 0.5em 0.05em; }
+      .productos-grid, .ventajas-grid, .contact-row { flex-direction: column; align-items: center; gap: 1em;}
+      .producto-card, .ventaja-card { width: 99vw; max-width: 99vw; min-width: 0; }
+      .producto-card img, .ventaja-card img { max-width: 120px; }
+      .contact-form, .contact-info { padding: 1em;}
+      .hero-titulo { font-size: 1.1em; }
+      .hero-image { max-width: 97vw; }
+      #cart-panel { right: 5px; width: 99vw; max-width: 99vw;}
+      #cart-panel { padding: 0.7em;}
+      #cart-floating-btn { right: 7px; padding: 0.8em 1.7em; font-size: 1.2em;}
+    }
+    @media (max-width: 500px) {
+      html { font-size: 14px;}
+      .navbar-logo img.logo-sobresale { width: 46px; height: 46px;}
+      .navbar-title { font-size: 0.9em;}
+      .hero-titulo { font-size: 1em;}
+      .navbar-container { padding: 0 0.1em;}
+    }
+    @media (max-width: 400px) {
+      html { font-size: 13px;}
+      .navbar-logo img.logo-sobresale { width: 34px; height: 34px;}
+      .navbar-title { font-size: 0.8em;}
+      .hero-titulo { font-size: 0.95em;}
+    }
+    /* NAVBAR mobile */
+    @media (max-width: 820px) {
+      .navbar-menu {
+        flex-direction: column;
+        gap: 0;
+        display: none;
+        background: #fff;
+        margin-top: 0.5em;
+        border-radius: 8px;
+        width: 100vw;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        box-shadow: 0 2px 12px #ffd49260;
+      }
+      .navbar-menu.open { display: flex; }
+      .navbar-toggle { display: block; }
+      .navbar-title { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="img/logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
+        <span class="navbar-title">El puesto de Juan</span>
+      </div>
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Abrir menú">
+        <i class="fa fa-bars"></i>
+      </button>
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
+        <li><a href="#productos">Listado</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a></li>
+      </ul>
+      <!-- INDICADOR ANIMADO -->
+      <div class="navbar-indicator" id="navbarIndicator"></div>
+    </div>
+  </nav>
+  <div class="container">
+    <!-- HERO -->
+    <section id="inicio">
+      <div style="margin-bottom:1em;">
+        <span class="hero-titulo" id="heroTitulo">Frutas y verduras frescas y de temporada</span>
+      </div>
+      <p style="font-size:1.05em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
+        Madrugamos en la huerta para llevar la mejor fruta y verdura directo a tu puerta.
+        Nos dedicamos con pasión y alegría a la cosecha diaria, para que disfrutes productos frescos, sanos y de calidad en tu mesa.
+        ¡Probá la diferencia!
+      </p>
+      <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
+    </section>
+    <!-- LISTADO SEPARADO -->
+    <section id="productos">
+      <h2>Listado de productos</h2>
+      <div id="productos-frutas">
+        <h3>Frutas</h3>
+        <div class="productos-grid" id="lista-frutas">
+          <div>Cargando frutas...</div>
+        </div>
+      </div>
+      <div id="productos-verduras" style="margin-top:2.5em;">
+        <h3>Verduras</h3>
+        <div class="productos-grid" id="lista-verduras">
+          <div>Cargando verduras...</div>
+        </div>
+      </div>
+    </section>
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+      <h2>Nosotros</h2>
+      <div class="ventajas-grid">
+        <div class="ventaja-card">
+          <img src="img/nosotros1.png" alt="Equipo de trabajo">
+          <h4>Gente de campo</h4>
+          <p>
+            Somos un equipo familiar dedicado a producir frutas y verduras frescas y de calidad.
+          </p>
+        </div>
+        <div class="ventaja-card">
+          <img src="img/nosotros2.png" alt="Confianza">
+          <h4>Venta directa</h4>
+          <p>
+            Vendemos sin intermediarios, directo de nuestra chacra a tu mesa, siempre al mejor precio.
+          </p>
+        </div>
+        <div class="ventaja-card">
+          <img src="img/nosotros3.png" alt="Productos caseros">
+          <h4>También casero</h4>
+          <p>
+            Ofrecemos dulces, conservas y productos hechos en casa, naturales y ricos.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <div class="contact-row">
+        <div class="contact-info">
+          <ul>
+            <li><i class="fa fa-map-marker-alt"></i> Canelones, Uruguay</li>
+            <li><i class="fa fa-phone"></i> <a href="tel:094691690">094691690</a></li>
+            <li><i class="fa fa-envelope"></i> <a href="mailto:info@elpuestodejuan.com">info@elpuestodejuan.com</a></li>
+            <li><i class="fab fa-facebook-square"></i> <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener">El puesto de Juan</a></li>
+          </ul>
+        </div>
+        <!-- NUEVO FORMULARIO PROFESIONAL CON FORMSPREE -->
+        <form class="contact-form" action="https://formspree.io/f/mrbkpyol" method="POST" id="contactForm">
+          <label for="nombre"><i class="fa fa-user"></i> Nombre</label>
+          <input type="text" id="nombre" name="nombre" required autocomplete="off" placeholder="Tu nombre completo">
+
+          <label for="email"><i class="fa fa-envelope"></i> Email</label>
+          <input type="email" id="email" name="email" required autocomplete="off" placeholder="Tu email">
+
+          <label for="mensaje"><i class="fa fa-comment"></i> Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
+
+          <button type="submit"><i class="fa fa-paper-plane"></i> Enviar mensaje</button>
+          <div id="contact-status"></div>
+        </form>
+      </div>
+    </section>
+  </div>
+  <footer>
+    © 2025 El puesto de Juan. Todos los derechos reservados.
+  </footer>
+  <!-- SONIDO CAMPANITA -->
+  <audio id="bell-sound" src="img/bell.mp3" preload="auto"></audio>
+  <!-- Carrito flotante moderno -->
+  <button id="cart-floating-btn" title="Ver carrito">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+  </button>
+  <div id="cart-panel">
+    <button id="cart-panel-close" title="Cerrar">&times;</button>
+    <h4>Carrito</h4>
+    <div id="cart-list"></div>
+    <div id="cart-total-row">
+      <span>Total:</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <button id="cart-finish-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;display:none;">
+      <i class="fab fa-whatsapp"></i> Finalizar compra
+    </button>
+    <form id="cart-panel-form" style="display:none;">
+      <label>¿Cómo preferís pagar?</label>
+      <label><input type="radio" name="pago" value="Efectivo" class="cart-pay-radio" required> Efectivo</label>
+      <label><input type="radio" name="pago" value="Débito" class="cart-pay-radio"> Débito</label>
+      <input type="text" id="cart-client-name" placeholder="Tu nombre" required style="margin-top:0.6em;padding:0.5em 1em;font-size:1em;border-radius:5px;border:1.5px solid #c0dcc0;width:95%;">
+      <button type="submit" class="cart-pay-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;">
+        <i class="fab fa-whatsapp"></i> Enviar pedido
+      </button>
+    </form>
+  </div>
+  <script>
+    // ----------- NAVBAR MOBILE -----------
+    document.getElementById('navbarToggle').onclick = function() {
+      document.getElementById('navbarMenu').classList.toggle('open');
+    };
+    const links = document.querySelectorAll('.navbar-menu a');
+    links.forEach(link => {
+      link.addEventListener('click', function() {
+        links.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        if(window.innerWidth < 950) {
+          document.getElementById('navbarMenu').classList.remove('open');
+        }
+      });
+    });
+
+    // ----------- FORM CONTACTO PROFESIONAL (Formspree + feedback) -----------
+    document.getElementById('contactForm').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const form = this;
+      const status = document.getElementById('contact-status');
+      status.textContent = "Enviando...";
+      status.style.color = "#fd9644";
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          status.textContent = "¡Mensaje enviado! Pronto te responderemos.";
+          status.style.color = "#14c97c";
+          form.reset();
+        } else {
+          status.textContent = "Ocurrió un error. Intenta de nuevo o contáctanos por WhatsApp.";
+          status.style.color = "#fe7d23";
+        }
+      } catch {
+        status.textContent = "No se pudo enviar el mensaje. Intenta de nuevo.";
+        status.style.color = "#fe7d23";
+      }
+    });
+
+    // ----------- PRODUCTOS DINÁMICOS DESDE SHEETS SEPARADOS FRUTA/VERDURA -----------
+    const SHEET_BEST_URL = "https://api.sheetbest.com/sheets/789820cd-375c-4eb7-9d4b-7d93d9a0d0d3";
+    let productosSheet = [];
+    fetch(SHEET_BEST_URL)
+      .then(res => res.json())
+      .then(productos => {
+        productosSheet = productos.filter(p => (p.activo || '').trim().toLowerCase() === "sí");
+        renderProductosSeparados();
+      })
+      .catch(() => {
+        document.getElementById('lista-frutas').innerHTML = '<div style="color:red;">No se pudieron cargar los productos. Intenta más tarde.</div>';
+        document.getElementById('lista-verduras').innerHTML = '';
+      });
+
+    // SEPARA FRUTAS Y VERDURAS SEGÚN LA COLUMNA 'tipo'
+    function renderProductosSeparados() {
+      const contFrutas = document.getElementById('lista-frutas');
+      const contVerduras = document.getElementById('lista-verduras');
+      contFrutas.innerHTML = '';
+      contVerduras.innerHTML = '';
+      let hayFrutas = false, hayVerduras = false;
+      productosSheet.forEach((p, idx) => {
+        let agotado = parseInt(p.stock) < 1;
+        let card = `
+          <div class="producto-card">
+            <img src="img/${p.nombre.toLowerCase()}.png" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <span class="precio">$${p.precio}</span>
+            <button class="agregar-btn" ${agotado ? "disabled" : ""} onclick="addToCart('${p.nombre.replace(/'/g,"\\'")}',${parseInt(p.precio)},${parseInt(p.stock)},${idx})">
+              <i class="fa fa-cart-plus"></i>${agotado ? "Sin stock" : "Agregar"}
+            </button>
+          </div>
+        `;
+        if((p.tipo||'').trim().toLowerCase() === 'fruta') {
+          contFrutas.innerHTML += card;
+          hayFrutas = true;
+        } else if((p.tipo||'').trim().toLowerCase() === 'verdura') {
+          contVerduras.innerHTML += card;
+          hayVerduras = true;
+        }
+      });
+      if (!hayFrutas) contFrutas.innerHTML = '<div>No hay frutas activas en este momento.</div>';
+      if (!hayVerduras) contVerduras.innerHTML = '<div>No hay verduras activas en este momento.</div>';
+    }
+
+    // ----------- Carrito flotante moderno + WhatsApp -----------
+    const cartBtn = document.getElementById('cart-floating-btn');
+    const cartPanel = document.getElementById('cart-panel');
+    const cartPanelClose = document.getElementById('cart-panel-close');
+    const cartCount = document.getElementById('cart-count');
+    const cartList = document.getElementById('cart-list');
+    const cartTotal = document.getElementById('cart-total');
+    const cartFinishBtn = document.getElementById('cart-finish-btn');
+    const cartPanelForm = document.getElementById('cart-panel-form');
+    const cartClientName = document.getElementById('cart-client-name');
+    let cart = [];
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito', JSON.stringify(cart));
+    }
+    function cargarCarrito() {
+      const guardado = localStorage.getItem('carrito');
+      if (guardado) cart = JSON.parse(guardado);
+      renderCart();
+    }
+
+    cartBtn.onclick = () => cartPanel.classList.toggle('open');
+    cartPanelClose.onclick = () => cartPanel.classList.remove('open');
+
+    function renderCart() {
+      cartCount.textContent = cart.reduce((a, item) => a + item.qty, 0);
+      cartList.innerHTML = cart.length ? cart.map((item, i) => `
+        <div class="cart-item">
+          <span class="cart-item-title">${item.title}</span>
+          <div class="cart-item-controls">
+            <button onclick="restarCartItem(${i})">-</button>
+            <span class="cart-item-qty">${item.qty}</span>
+            <button onclick="sumarCartItem(${i})">+</button>
+          </div>
+          <span class="cart-item-precio">$${item.price}</span>
+          <span class="cart-item-subtotal" style="font-weight:600;">$${item.price * item.qty}</span>
+          <span class="cart-item-remove" onclick="removeCartItem(${i})">&times;</span>
+        </div>
+      `).join('') : '<div style="color:#aaa;text-align:center;">Carrito vacío</div>';
+      let total = cart.reduce((a, item) => a + item.qty * item.price, 0);
+      cartTotal.textContent = '$' + total.toLocaleString('es-UY');
+      cartPanelForm.style.display = "none";
+      cartFinishBtn.style.display = cart.length ? "block" : "none";
+    }
+    window.removeCartItem = function(i) {
+      cart.splice(i, 1);
+      guardarCarrito();
+      renderCart();
+    };
+    window.sumarCartItem = function(i) {
+      let stockMax = cart[i].stock;
+      if (cart[i].qty < stockMax) {
+        cart[i].qty++;
+        guardarCarrito();
+        renderCart();
+      } else {
+        alert("No hay más stock disponible para este producto.");
+      }
+    };
+    window.restarCartItem = function(i) {
+      cart[i].qty--;
+      if (cart[i].qty <= 0) {
+        cart.splice(i,1);
+      }
+      guardarCarrito();
+      renderCart();
+    };
+    window.addToCart = function(title, price, stock, sheetIdx) {
+      let idx = cart.findIndex(i => i.title === title);
+      if(idx >= 0) {
+        if(cart[idx].qty < stock) {
+          cart[idx].qty += 1;
+        } else {
+          alert("No hay más stock disponible para este producto.");
+          return;
+        }
+      } else {
+        if(stock > 0) {
+          cart.push({title, price, qty: 1, stock, sheetIdx});
+        } else {
+          alert("Producto sin stock.");
+          return;
+        }
+      }
+      guardarCarrito();
+      renderCart();
+      // SONIDO CAMPANITA
+      let bell = document.getElementById("bell-sound");
+      if (bell) { bell.currentTime = 0; bell.play(); }
+      cartBtn.classList.add('bump');
+      setTimeout(()=>cartBtn.classList.remove('bump'), 200);
+    };
+
+    // Botón para mostrar el formulario de pago
+    cartFinishBtn.onclick = function() {
+      if(cart.length === 0) return;
+      cartPanelForm.style.display = "flex";
+      cartPanelForm.scrollIntoView({behavior: "smooth", block: "center"});
+      cartFinishBtn.style.display = "none";
+    };
+
+    // Enviar WhatsApp al enviar el formulario y limpiar todo
+    cartPanelForm.onsubmit = function(e) {
+      e.preventDefault();
+      if(cart.length === 0) return;
+      let pago = cartPanelForm.querySelector('input[name="pago"]:checked');
+      let nombre = cartClientName.value.trim();
+      if(!pago || !nombre) {
+        alert("Por favor, completá tu nombre y elegí el método de pago.");
+        return;
+      }
+      let saludo = `¡Hola Juan! Soy ${nombre} y te hago este pedido desde la web:\n\n`;
+      let lista = cart.map(i => `• ${i.title} x${i.qty} - $${i.price * i.qty}`).join('\n');
+      let total = cart.reduce((a, item) => a + item.qty * item.price, 0);
+      let pagoMensaje = `\n\nMétodo de pago: ${pago.value}`;
+      let mensaje = encodeURIComponent(saludo + lista + `\n\nTotal: $${total}\n` + pagoMensaje);
+      let url = `https://api.whatsapp.com/send?phone=+59894691690&text=${mensaje}`;
+      window.open(url, "_blank");
+      cartPanel.classList.remove('open');
+      cart = [];
+      guardarCarrito();
+      renderCart();
+      cartPanelForm.reset();
+      cartPanelForm.style.display = "none";
+    };
+
+    cargarCarrito();
+
+    // ----------- HERO FRASE PRINCIPAL ALTERNANTE -----------
+    const frasesHero = [
+      "Frutas y verduras frescas y de temporada",
+      "Envío gratis a partir de $300 de compra",
+      "Mas de 10 años de experiencia con la gente",
+      "Seleccionamos cada producto pensando en usted",
+      "Los mejores precios"
+    ];
+    let idxHero = 0;
+    const heroTitulo = document.getElementById('heroTitulo');
+    setInterval(() => {
+      idxHero = (idxHero + 1) % frasesHero.length;
+      heroTitulo.style.opacity = 0;
+      setTimeout(() => {
+        heroTitulo.textContent = frasesHero[idxHero];
+        heroTitulo.style.opacity = 1;
+      }, 400);
+    }, 6000);
+
+    // ----------- NAVBAR INDICADOR ANIMADO -----------
+    const navbarMenu = document.getElementById('navbarMenu');
+    const navbarIndicator = document.getElementById('navbarIndicator');
+    function moveNavbarIndicator() {
+      const active = navbarMenu.querySelector('a.active');
+      if (!active || window.innerWidth < 820) {
+        navbarIndicator.style.width = '0';
+        return;
+      }
+      const menuRect = navbarMenu.getBoundingClientRect();
+      const linkRect = active.getBoundingClientRect();
+      navbarIndicator.style.width = linkRect.width + 'px';
+      navbarIndicator.style.left = (linkRect.left - menuRect.left) + 'px';
+    }
+    window.addEventListener('resize', moveNavbarIndicator);
+    navbarMenu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') setTimeout(moveNavbarIndicator, 200);
+    });
+    document.addEventListener('DOMContentLoaded', moveNavbarIndicator);
+
+    // Opcional: mover el indicador al hacer scroll según sección visible
+    const sections = ['inicio', 'productos', 'nosotros', 'contacto'];
+    window.addEventListener('scroll', () => {
+      let scrollPos = window.scrollY || window.pageYOffset;
+      let found = false;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sections[i]);
+        if (sec && sec.offsetTop <= scrollPos + 80) {
+          navbarMenu.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+          let navLink = navbarMenu.querySelector(`a[href="#${sections[i]}"]`);
+          if (navLink) navLink.classList.add('active');
+          moveNavbarIndicator();
+          found = true;
+          break;
+        }
+      }
+      if (!found) moveNavbarIndicator();
+    });
+  </script>
+</body>
+</html>
