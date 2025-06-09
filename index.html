@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <title>El puesto de Juan - Frutas y Verduras</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Fonts y Font Awesome -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
+  <!-- Montserrat, Open Sans y Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Montserrat:wght@900&display=swap" rel="stylesheet">
   <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
   <style>
     html { scroll-behavior: smooth; font-size: 17px;}
@@ -17,6 +18,19 @@
       margin: 0;
       min-height: 100vh;
       font-size: 1.06em;
+    }
+    .hero-titulo {
+      font-family: 'Rye', 'Montserrat', Arial, sans-serif;
+      font-size: 2.5em;
+      color: #fd9644;
+      text-align: center;
+      margin-bottom: 0.15em;
+      text-shadow: 0 2px 12px #ffe9c7, 1px 1px 0 #fffbe6;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+      display: block;
+      min-height: 1.5em;
+      transition: opacity .5s;
     }
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', Arial, sans-serif;
@@ -174,7 +188,7 @@
     }
     .hero-image {
       width: 100%;
-      max-width: 420px; /* achicado a 60% de 700px */
+      max-width: 420px;
       height: auto;
       display: block;
       margin: 2em auto 0 auto;
@@ -324,14 +338,123 @@
     .contact-info i { color: #14c97c; margin-right: 0.45em;}
     .contact-info a { font-weight: bold;}
     footer { text-align: center; padding: 2em 0 1.2em 0; color: #fd9644; font-size: 1.03em; background: #fffbe6; font-family: 'Montserrat', Arial, sans-serif; font-weight: 700;}
+    /* Carrito flotante */
+    #cart-floating-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px #ffb96e40;
+      padding: 0.6em 1.2em;
+      font-size: 1.08em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      cursor: pointer;
+      z-index: 2000;
+      transition: background .2s;
+    }
+    #cart-floating-btn:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
+    #cart-count {
+      background: #fff;
+      color: #fd9644;
+      border-radius: 50%;
+      font-size: 0.95em;
+      font-weight: bold;
+      padding: 2px 8px;
+      margin-left: 4px;
+      min-width: 22px;
+      text-align: center;
+    }
+    #cart-panel {
+      position: fixed;
+      right: 24px;
+      bottom: 76px;
+      width: 340px;
+      max-height: 70vh;
+      background: #fffbe6;
+      border-radius: 15px;
+      box-shadow: 0 4px 32px #fd964430;
+      padding: 1em 1em 1em 1em;
+      z-index: 2100;
+      display: none;
+      flex-direction: column;
+      animation: cart-fadein .25s;
+      border: 2px solid #ffd492;
+    }
+    @keyframes cart-fadein { from { opacity:0; transform:translateY(35px);} to { opacity:1; transform:translateY(0);} }
+    #cart-panel.open { display: flex; }
+    #cart-panel h4 { margin: 0 0 0.5em 0; font-family: 'Montserrat', Arial, sans-serif; color: #fd9644; font-weight:700;}
+    #cart-list { flex: 1 1 auto; overflow-y: auto; margin-bottom: 1em;}
+    #cart-list .cart-item {
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #ffd492; padding: 0.5em 0;
+      text-align: center;
+    }
+    #cart-list .cart-item:last-child { border-bottom: none;}
+    .cart-item-title { flex: 1 1 auto; margin-right: 0.6em;}
+    .cart-item-qty { font-weight: bold; margin: 0 0.6em;}
+    .cart-item-precio {
+      color: #14c97c;
+      font-size: 0.97em;
+      margin: 0 0.5em;
+      min-width: 54px;
+      display: inline-block;
+      text-align: right;
+    }
+    .cart-item-subtotal {
+      color: #fd9644;
+      font-size: 1em;
+      margin-left: 0.3em;
+      min-width: 64px;
+      display: inline-block;
+      text-align: right;
+    }
+    .cart-item-remove {
+      background: #ffd492; color: #fe7d23; border: none; border-radius: 8px;
+      padding: 0.22em 0.7em; font-size: 1em; cursor: pointer;
+    }
+    .cart-item-controls {
+      display: flex; align-items: center; gap: 0.3em;
+    }
+    .cart-item-controls button {
+      background: #fe7d23; color: #fff; border: none; border-radius: 50%; width: 1.5em; height: 1.5em; font-size: 1em; cursor: pointer;
+      font-weight:bold; transition: background .15s;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .cart-item-controls button:hover { background: #14c97c;}
+    #cart-total-row {
+      font-weight: bold; display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1em;
+      font-size: 1em;
+      color: #fd9644;
+    }
+    #cart-panel-close {
+      position: absolute; top: 8px; right: 10px; background: none; border: none;
+      font-size: 1.2em; color: #bbb; cursor: pointer;
+    }
+    #cart-panel-form { border-top: 1px solid #ffd492; margin-top: 1em; padding-top: 1em; display: none; flex-direction: column; gap: 1em;}
+    #cart-panel-form label { font-weight: 600; color: #14c97c;}
+    #cart-panel-form .cart-pay-btn {
+      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
+      color:#fff;padding:0.6em 1.2em;border:none;border-radius:8px;font-size:1em;cursor:pointer; margin-top:0.6em;
+      font-weight: bold;
+    }
+    #cart-panel-form .cart-pay-btn:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
+    #cart-panel-form .cart-pay-radio { margin-right: 0.5em;}
     @media (max-width: 1050px) { .container { max-width: 98vw;} }
     @media (max-width: 950px) {
       .productos-grid, .ventajas-grid, .contact-row { flex-direction: column; align-items: center;}
       .producto-card, .ventaja-card { width: 96%; max-width: 340px; }
     }
     @media (max-width: 500px) {
-      .navbar-logo img.logo-sobresale { width: 56px; height: 56px; top: 18px; left: -12px;}
-      .navbar-title { font-size: 0.95em; margin-left: 60px;}
+      #cart-panel, #cart-floating-btn { right: 7px; }
+      #cart-panel { width: 97vw;}
+      .navbar-logo { font-size: 1em;}
       .producto-card, .ventaja-card { min-width: 96vw; }
       .contact-form, .contact-info { padding: 1em;}
       h1 { font-size: 1em;}
@@ -344,7 +467,7 @@
   <nav>
     <div class="navbar-container">
       <div class="navbar-logo">
-        <img src="logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
+        <img src="img/logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
         <span class="navbar-title">El puesto de Juan</span>
       </div>
       <button class="navbar-toggle" id="navbarToggle" aria-label="Abrir menú">
@@ -353,7 +476,7 @@
       <ul class="navbar-menu" id="navbarMenu">
         <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
         <li><a href="#productos">Listado</a></li>
-        <li><a href="#ventajas">Ventajas</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li><a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a></li>
       </ul>
@@ -362,43 +485,55 @@
   <div class="container">
     <!-- HERO -->
     <section id="inicio">
-      <h1>Frutas y verduras frescas y de temporada</h1>
+      <div style="margin-bottom:1em;">
+        <span class="hero-titulo" id="heroTitulo">Frutas y verduras frescas y de temporada</span>
+      </div>
       <p style="font-size:1.05em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
         Somos productores en Canelones. Entregamos frutas y verduras recién cosechadas, sin intermediarios, directo a tu mesa.<br>
         <b>Técnicas ecológicas</b> y abonos naturales. Pagás al recibir. <span style="color:#45B113;font-weight:600;">Envío gratis</span> por pedidos mayores a $800.
       </p>
-      <img class="hero-image" src="portada.png" alt="Frutas y verduras frescas">
+      <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
     </section>
-    <!-- LISTADO -->
+    <!-- LISTADO SEPARADO -->
     <section id="productos">
       <h2>Listado de productos</h2>
-      <div class="productos-grid" id="productos-lista">
-        <div>Cargando productos...</div>
+      <div id="productos-frutas">
+        <h3>Frutas</h3>
+        <div class="productos-grid" id="lista-frutas">
+          <div>Cargando frutas...</div>
+        </div>
+      </div>
+      <div id="productos-verduras" style="margin-top:2.5em;">
+        <h3>Verduras</h3>
+        <div class="productos-grid" id="lista-verduras">
+          <div>Cargando verduras...</div>
+        </div>
       </div>
     </section>
-    <!-- VENTAJAS -->
-    <section id="ventajas">
-      <h2>Ventajas de comprar directo</h2>
+    <!-- NOSOTROS -->
+    <section id="nosotros">
+      <h2>Nosotros</h2>
       <div class="ventajas-grid">
         <div class="ventaja-card">
-          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3cd7?auto=format&fit=crop&w=140&q=80" alt="Frescura">
-          <h4>Frescura garantizada</h4>
-          <p>Cosechamos y entregamos en menos de 24hs. Sin cámaras ni conservantes.</p>
+          <img src="img/nosotros1.png" alt="Equipo de trabajo">
+          <h4>Gente de campo</h4>
+          <p>
+            Somos un equipo familiar dedicado a producir frutas y verduras frescas y de calidad.
+          </p>
         </div>
         <div class="ventaja-card">
-          <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=140&q=80" alt="Ecológico">
-          <h4>Ecológico</h4>
-          <p>Uso responsable del suelo, fertilizantes orgánicos y control natural de plagas.</p>
+          <img src="img/nosotros2.png" alt="Confianza">
+          <h4>Venta directa</h4>
+          <p>
+            Vendemos sin intermediarios, directo de nuestra chacra a tu mesa, siempre al mejor precio.
+          </p>
         </div>
         <div class="ventaja-card">
-          <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=140&q=80" alt="Precio justo">
-          <h4>Precio justo</h4>
-          <p>Sin intermediarios. Mejor precio para vos y para el productor.</p>
-        </div>
-        <div class="ventaja-card">
-          <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=140&q=80" alt="Variedad">
-          <h4>Variedad de temporada</h4>
-          <p>Frutas y verduras de estación, directo del campo a tu mesa.</p>
+          <img src="img/nosotros3.png" alt="Productos caseros">
+          <h4>También casero</h4>
+          <p>
+            Ofrecemos dulces, conservas y productos hechos en casa, naturales y ricos.
+          </p>
         </div>
       </div>
     </section>
@@ -425,8 +560,32 @@
     </section>
   </div>
   <footer>
-    &copy; 2025 El puesto de Juan. Todos los derechos reservados.
+    © 2025 El puesto de Juan. Todos los derechos reservados.
   </footer>
+  <!-- Carrito flotante moderno -->
+  <button id="cart-floating-btn" title="Ver carrito">
+    <i class="fa fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+  </button>
+  <div id="cart-panel">
+    <button id="cart-panel-close" title="Cerrar">&times;</button>
+    <h4>Carrito</h4>
+    <div id="cart-list"></div>
+    <div id="cart-total-row">
+      <span>Total:</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <button id="cart-finish-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;">
+      <i class="fab fa-whatsapp"></i> Finalizar compra
+    </button>
+    <form id="cart-panel-form">
+      <label>¿Cómo preferís pagar?</label>
+      <label><input type="radio" name="pago" value="Efectivo" class="cart-pay-radio" required> Efectivo</label>
+      <label><input type="radio" name="pago" value="Débito" class="cart-pay-radio"> Débito</label>
+      <input type="text" id="cart-client-name" placeholder="Tu nombre" required style="margin-top:0.6em;padding:0.5em 1em;font-size:1em;border-radius:5px;border:1.5px solid #c0dcc0;width:95%;">
+      <button type="submit" class="cart-pay-btn"><i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp</button>
+    </form>
+  </div>
   <script>
     // ----------- NAVBAR MOBILE -----------
     document.getElementById('navbarToggle').onclick = function() {
@@ -450,36 +609,179 @@
       this.reset();
     });
 
-    // ----------- PRODUCTOS DINÁMICOS DESDE SHEETS -----------
-    // REEMPLAZA esta URL por la que te da Sheet.best para tu planilla:
-    const SHEET_BEST_URL = "https://api.sheetbest.com/sheets/789820cd-375c-4eb7-9d4b-7d93d9a0d0d3"; // <-- pon la tuya
-
+    // ----------- PRODUCTOS DINÁMICOS DESDE SHEETS SEPARADOS FRUTA/VERDURA -----------
+    const SHEET_BEST_URL = "https://api.sheetbest.com/sheets/789820cd-375c-4eb7-9d4b-7d93d9a0d0d3";
+    let productosSheet = [];
     fetch(SHEET_BEST_URL)
       .then(res => res.json())
       .then(productos => {
-        const contenedor = document.getElementById('productos-lista');
-        contenedor.innerHTML = '';
-        productos.filter(p => (p.activo || '').trim().toLowerCase() === "sí")
-          .forEach(p => {
-            // Ajuste: Carga fotos desde la carpeta img/ usando el nombre del producto en minúsculas
-            contenedor.innerHTML += `
-              <div class="producto-card">
-                <img src="img/${p.nombre.toLowerCase()}.png" alt="${p.nombre}">
-                <h3>${p.nombre}</h3>
-                <span class="precio">$${p.precio}${p.stock && p.stock.trim() !== "" ? ` - Stock: ${p.stock}` : ""}</span>
-                <button class="agregar-btn" ${parseInt(p.stock) < 1 ? "disabled" : ""}>
-                  <i class="fa fa-cart-plus"></i>${parseInt(p.stock) < 1 ? "Sin stock" : "Agregar"}
-                </button>
-              </div>
-            `;
-          });
-        if (contenedor.innerHTML.trim() === '') {
-          contenedor.innerHTML = '<div>No hay productos activos en este momento.</div>';
-        }
+        productosSheet = productos.filter(p => (p.activo || '').trim().toLowerCase() === "sí");
+        renderProductosSeparados();
       })
       .catch(() => {
-        document.getElementById('productos-lista').innerHTML = '<div style="color:red;">No se pudieron cargar los productos. Intenta más tarde.</div>';
+        document.getElementById('lista-frutas').innerHTML = '<div style="color:red;">No se pudieron cargar los productos. Intenta más tarde.</div>';
+        document.getElementById('lista-verduras').innerHTML = '';
       });
+
+    // SEPARA FRUTAS Y VERDURAS SEGÚN LA COLUMNA 'tipo'
+    function renderProductosSeparados() {
+      const contFrutas = document.getElementById('lista-frutas');
+      const contVerduras = document.getElementById('lista-verduras');
+      contFrutas.innerHTML = '';
+      contVerduras.innerHTML = '';
+      let hayFrutas = false, hayVerduras = false;
+      productosSheet.forEach((p, idx) => {
+        let agotado = parseInt(p.stock) < 1;
+        let card = `
+          <div class="producto-card">
+            <img src="img/${p.nombre.toLowerCase()}.png" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <span class="precio">$${p.precio}</span>
+            <button class="agregar-btn" ${agotado ? "disabled" : ""} onclick="addToCart('${p.nombre.replace(/'/g,"\\'")}',${parseInt(p.precio)},${parseInt(p.stock)},${idx})">
+              <i class="fa fa-cart-plus"></i>${agotado ? "Sin stock" : "Agregar"}
+            </button>
+          </div>
+        `;
+        if((p.tipo||'').trim().toLowerCase() === 'fruta') {
+          contFrutas.innerHTML += card;
+          hayFrutas = true;
+        } else if((p.tipo||'').trim().toLowerCase() === 'verdura') {
+          contVerduras.innerHTML += card;
+          hayVerduras = true;
+        }
+      });
+      if (!hayFrutas) contFrutas.innerHTML = '<div>No hay frutas activas en este momento.</div>';
+      if (!hayVerduras) contVerduras.innerHTML = '<div>No hay verduras activas en este momento.</div>';
+    }
+
+    // ----------- Carrito flotante moderno + WhatsApp -----------
+    const cartBtn = document.getElementById('cart-floating-btn');
+    const cartPanel = document.getElementById('cart-panel');
+    const cartPanelClose = document.getElementById('cart-panel-close');
+    const cartCount = document.getElementById('cart-count');
+    const cartList = document.getElementById('cart-list');
+    const cartTotal = document.getElementById('cart-total');
+    const cartFinishBtn = document.getElementById('cart-finish-btn');
+    const cartPanelForm = document.getElementById('cart-panel-form');
+    const cartClientName = document.getElementById('cart-client-name');
+    let cart = [];
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito', JSON.stringify(cart));
+    }
+    function cargarCarrito() {
+      const guardado = localStorage.getItem('carrito');
+      if (guardado) cart = JSON.parse(guardado);
+      renderCart();
+    }
+
+    cartBtn.onclick = () => cartPanel.classList.toggle('open');
+    cartPanelClose.onclick = () => cartPanel.classList.remove('open');
+
+    function renderCart() {
+      cartCount.textContent = cart.reduce((a, item) => a + item.qty, 0);
+      cartList.innerHTML = cart.length ? cart.map((item, i) => `
+        <div class="cart-item">
+          <span class="cart-item-title">${item.title}</span>
+          <div class="cart-item-controls">
+            <button onclick="restarCartItem(${i})">-</button>
+            <span class="cart-item-qty">${item.qty}</span>
+            <button onclick="sumarCartItem(${i})">+</button>
+          </div>
+          <span class="cart-item-precio">$${item.price}</span>
+          <span class="cart-item-subtotal" style="font-weight:600;">$${item.price * item.qty}</span>
+          <span class="cart-item-remove" onclick="removeCartItem(${i})">&times;</span>
+        </div>
+      `).join('') : '<div style="color:#aaa;text-align:center;">Carrito vacío</div>';
+      let total = cart.reduce((a, item) => a + item.qty * item.price, 0);
+      cartTotal.textContent = '$' + total.toLocaleString('es-UY');
+      cartPanelForm.style.display = "none";
+      cartFinishBtn.style.display = cart.length ? "block" : "none";
+    }
+    window.removeCartItem = function(i) {
+      cart.splice(i, 1);
+      guardarCarrito();
+      renderCart();
+    };
+    window.sumarCartItem = function(i) {
+      let stockMax = cart[i].stock;
+      if (cart[i].qty < stockMax) {
+        cart[i].qty++;
+        guardarCarrito();
+        renderCart();
+      }
+    };
+    window.restarCartItem = function(i) {
+      cart[i].qty--;
+      if (cart[i].qty <= 0) {
+        cart.splice(i,1);
+      }
+      guardarCarrito();
+      renderCart();
+    };
+    window.addToCart = function(title, price, stock, sheetIdx) {
+      let idx = cart.findIndex(i => i.title === title);
+      if(idx >= 0) {
+        if(cart[idx].qty < stock) {
+          cart[idx].qty += 1;
+        }
+      } else {
+        cart.push({title, price, qty: 1, stock, sheetIdx});
+      }
+      guardarCarrito();
+      renderCart();
+      cartBtn.classList.add('bump');
+      setTimeout(()=>cartBtn.classList.remove('bump'), 200);
+    };
+
+    cartFinishBtn.onclick = function() {
+      if(cart.length === 0) return;
+      cartPanelForm.style.display = "flex";
+      cartPanelForm.scrollIntoView({behavior: "smooth", block: "center"});
+    };
+
+    cartPanelForm.onsubmit = function(e) {
+      e.preventDefault();
+      if(cart.length === 0) return;
+      let pago = cartPanelForm.querySelector('input[name="pago"]:checked');
+      let nombre = cartClientName.value.trim();
+      if(!pago || !nombre) {
+        alert("Por favor, completá tu nombre y elegí el método de pago.");
+        return;
+      }
+      let saludo = `¡Hola Juan! Soy ${nombre} y te hago este pedido desde la web:\n\n`;
+      let lista = cart.map(i => `• ${i.title} x${i.qty} - $${i.price * i.qty}`).join('\n');
+      let total = cart.reduce((a, item) => a + item.qty * item.price, 0);
+      let pagoMensaje = `\n\nMétodo de pago: ${pago.value}`;
+      let mensaje = encodeURIComponent(saludo + lista + `\n\nTotal: $${total}\n` + pagoMensaje);
+      let url = `https://api.whatsapp.com/send?phone=598691690&text=${mensaje}`;
+      window.open(url, "_blank");
+      cartPanel.classList.remove('open');
+      cart = [];
+      guardarCarrito();
+      renderCart();
+      cartPanelForm.reset();
+    };
+
+    cargarCarrito();
+
+    // ----------- HERO FRASE PRINCIPAL ALTERNANTE -----------
+    const frasesHero = [
+      "Frutas y verduras frescas y de temporada",
+          "Somos familia",
+      "productos de calidad",
+      "Los mejores precios"
+    ];
+    let idxHero = 0;
+    const heroTitulo = document.getElementById('heroTitulo');
+    setInterval(() => {
+      idxHero = (idxHero + 1) % frasesHero.length;
+      heroTitulo.style.opacity = 0;
+      setTimeout(() => {
+        heroTitulo.textContent = frasesHero[idxHero];
+        heroTitulo.style.opacity = 1;
+      }, 400);
+    }, 6000);
   </script>
 </body>
 </html>
