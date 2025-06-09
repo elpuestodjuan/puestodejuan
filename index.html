@@ -22,10 +22,10 @@
     .hero-titulo {
       font-family: 'Rye', 'Montserrat', Arial, sans-serif;
       font-size: 2.5em;
-      color: #fd9644;
+      color: #14c97c;
       text-align: center;
       margin-bottom: 0.15em;
-      text-shadow: 0 2px 12px #ffe9c7, 1px 1px 0 #fffbe6;
+      text-shadow: 0 2px 12px #e9ffe7, 1px 1px 0 #fffbe6;
       letter-spacing: 0.01em;
       font-weight: 700;
       display: block;
@@ -440,9 +440,19 @@
     #cart-panel-form { border-top: 1px solid #ffd492; margin-top: 1em; padding-top: 1em; display: none; flex-direction: column; gap: 1em;}
     #cart-panel-form label { font-weight: 600; color: #14c97c;}
     #cart-panel-form .cart-pay-btn {
-      background: linear-gradient(90deg, #fe7d23 80%, #14c97c 100%);
-      color:#fff;padding:0.6em 1.2em;border:none;border-radius:8px;font-size:1em;cursor:pointer; margin-top:0.6em;
+      background: #25d366;
+      color:#fff;
+      padding:0.7em 1.4em;
+      border:none;
+      border-radius:5px;
+      font-size:1em;
+      cursor:pointer;
+      margin-top:0.6em;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4em;
     }
     #cart-panel-form .cart-pay-btn:hover { background: linear-gradient(90deg, #14c97c 60%, #fe7d23 100%);}
     #cart-panel-form .cart-pay-radio { margin-right: 0.5em;}
@@ -489,8 +499,9 @@
         <span class="hero-titulo" id="heroTitulo">Frutas y verduras frescas y de temporada</span>
       </div>
       <p style="font-size:1.05em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
-        Somos productores en Canelones. Entregamos frutas y verduras recién cosechadas, sin intermediarios, directo a tu mesa.<br>
-        <b>Técnicas ecológicas</b> y abonos naturales. Pagás al recibir. <span style="color:#45B113;font-weight:600;">Envío gratis</span> por pedidos mayores a $800.
+        Madrugamos en la huerta para llevar la mejor fruta y verdura directo a tu puerta.
+        Nos dedicamos con pasión y alegría a la cosecha diaria, para que disfrutes productos frescos, sanos y de calidad en tu mesa.
+        ¡Probá la diferencia!
       </p>
       <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
     </section>
@@ -544,9 +555,9 @@
         <div class="contact-info">
           <ul>
             <li><i class="fa fa-map-marker-alt"></i> Canelones, Uruguay</li>
-            <li><i class="fa fa-phone"></i> <a href="tel:099999999">099 999 999</a></li>
+            <li><i class="fa fa-phone"></i> <a href="tel:094691690">094691690</a></li>
             <li><i class="fa fa-envelope"></i> <a href="mailto:info@elpuestodejuan.com">info@elpuestodejuan.com</a></li>
-            <li><i class="fab fa-facebook-square"></i> <a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener">Directo de la Chacra</a></li>
+            <li><i class="fab fa-facebook-square"></i> <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener">El puesto de Juan</a></li>
           </ul>
         </div>
         <form class="contact-form">
@@ -562,6 +573,8 @@
   <footer>
     © 2025 El puesto de Juan. Todos los derechos reservados.
   </footer>
+  <!-- SONIDO CAMPANITA -->
+  <audio id="bell-sound" src="img/bell.mp3" preload="auto"></audio>
   <!-- Carrito flotante moderno -->
   <button id="cart-floating-btn" title="Ver carrito">
     <i class="fa fa-shopping-cart"></i>
@@ -575,15 +588,17 @@
       <span>Total:</span>
       <span id="cart-total">$0</span>
     </div>
-    <button id="cart-finish-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;">
+    <button id="cart-finish-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;display:none;">
       <i class="fab fa-whatsapp"></i> Finalizar compra
     </button>
-    <form id="cart-panel-form">
+    <form id="cart-panel-form" style="display:none;">
       <label>¿Cómo preferís pagar?</label>
       <label><input type="radio" name="pago" value="Efectivo" class="cart-pay-radio" required> Efectivo</label>
       <label><input type="radio" name="pago" value="Débito" class="cart-pay-radio"> Débito</label>
       <input type="text" id="cart-client-name" placeholder="Tu nombre" required style="margin-top:0.6em;padding:0.5em 1em;font-size:1em;border-radius:5px;border:1.5px solid #c0dcc0;width:95%;">
-      <button type="submit" class="cart-pay-btn"><i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp</button>
+      <button type="submit" class="cart-pay-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;">
+        <i class="fab fa-whatsapp"></i> Enviar pedido
+      </button>
     </form>
   </div>
   <script>
@@ -709,6 +724,8 @@
         cart[i].qty++;
         guardarCarrito();
         renderCart();
+      } else {
+        alert("No hay más stock disponible para este producto.");
       }
     };
     window.restarCartItem = function(i) {
@@ -724,22 +741,36 @@
       if(idx >= 0) {
         if(cart[idx].qty < stock) {
           cart[idx].qty += 1;
+        } else {
+          alert("No hay más stock disponible para este producto.");
+          return;
         }
       } else {
-        cart.push({title, price, qty: 1, stock, sheetIdx});
+        if(stock > 0) {
+          cart.push({title, price, qty: 1, stock, sheetIdx});
+        } else {
+          alert("Producto sin stock.");
+          return;
+        }
       }
       guardarCarrito();
       renderCart();
+      // SONIDO CAMPANITA
+      let bell = document.getElementById("bell-sound");
+      if (bell) { bell.currentTime = 0; bell.play(); }
       cartBtn.classList.add('bump');
       setTimeout(()=>cartBtn.classList.remove('bump'), 200);
     };
 
+    // Botón para mostrar el formulario de pago
     cartFinishBtn.onclick = function() {
       if(cart.length === 0) return;
       cartPanelForm.style.display = "flex";
       cartPanelForm.scrollIntoView({behavior: "smooth", block: "center"});
+      cartFinishBtn.style.display = "none";
     };
 
+    // Enviar WhatsApp al enviar el formulario y limpiar todo
     cartPanelForm.onsubmit = function(e) {
       e.preventDefault();
       if(cart.length === 0) return;
@@ -761,6 +792,7 @@
       guardarCarrito();
       renderCart();
       cartPanelForm.reset();
+      cartPanelForm.style.display = "none";
     };
 
     cargarCarrito();
@@ -768,8 +800,9 @@
     // ----------- HERO FRASE PRINCIPAL ALTERNANTE -----------
     const frasesHero = [
       "Frutas y verduras frescas y de temporada",
-          "Somos familia",
-      "productos de calidad",
+      "Somos confiables y eficientes",
+      "Somos familia",
+      "Vendemos calidad",
       "Los mejores precios"
     ];
     let idxHero = 0;
