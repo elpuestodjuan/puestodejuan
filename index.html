@@ -10,8 +10,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Rye&family=Montserrat:wght@900&display=swap" rel="stylesheet">
   <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
   <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Ventana flotante explicativa */
+    #explicativo-flotante {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22,22,22,0.48);
+      transition: opacity 0.25s;
+    }
+    #explicativo-flotante.oculto {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .explicativo-box {
+      background: #fff;
+      border-radius: 13px;
+      padding: 2.2em 2em 2em 2em;
+      box-shadow: 0 8px 36px #2222;
+      max-width: 400px;
+      width: 92vw;
+      text-align: left;
+      position: relative;
+      font-family: 'Open Sans', Arial, sans-serif;
+      animation: popIn 0.5s;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.85); opacity: 0;}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    .explicativo-box h2 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #14c97c;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 0.4em;
+    }
+    .explicativo-box ul {
+      margin: 0 0 0.7em 0;
+      padding-left: 1.3em;
+      color: #353535;
+      font-size: 1.09em;
+    }
+    .explicativo-cerrar {
+      position: absolute;
+      top: 9px; right: 15px;
+      background: none;
+      border: none;
+      font-size: 2em;
+      color: #fd9644;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .explicativo-cerrar:hover { color: #fe7d23; }
+    @media (max-width: 480px) {
+      .explicativo-box { padding: 1.2em 0.6em 1.7em 0.6em; }
+    }
+  </style>
 </head>
 <body>
+  <!-- Ventana flotante explicativa -->
+  <div id="explicativo-flotante">
+    <div class="explicativo-box">
+      <button class="explicativo-cerrar" id="cerrar-explicativo" aria-label="Cerrar">&times;</button>
+      <h2>¿Cómo comprar aquí?</h2>
+      <ul>
+        <li>Navegá el <b>listado</b> y agregá productos al carrito con el botón <i class="fa fa-cart-plus" style="color:#14c97c"></i>.</li>
+        <li>Revisá tu pedido en el <b>carrito</b> flotante abajo a la derecha.</li>
+        <li>Completá tus datos, dirección y forma de pago.</li>
+        <li>¡Enviá el pedido por WhatsApp y te lo llevamos!</li>
+      </ul>
+      <div style="font-size:0.95em;color:#888;margin-top:.5em;">
+        <i class="fa fa-info-circle"></i>
+        <span>Puedes volver a ver esta ayuda recargando la página.</span>
+      </div>
+    </div>
+  </div>
   <!-- NAVBAR -->
   <nav>
     <div class="navbar-container">
@@ -317,6 +395,23 @@
       </button>
     </form>
   </div>
+  <script>
+    // Explicativo flotante: cerrar al hacer click en botón o fondo
+    document.addEventListener('DOMContentLoaded', function() {
+      var exp = document.getElementById('explicativo-flotante');
+      var btn = document.getElementById('cerrar-explicativo');
+      btn.onclick = function() { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); };
+      exp.onclick = function(e) {
+        if(e.target === exp) { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); }
+      };
+      // Opcional: cerrar con Esc
+      document.addEventListener('keydown', function(ev) {
+        if(ev.key === "Escape" && exp.style.display !== "none") {
+          exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300);
+        }
+      });
+    });
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
