@@ -1,3 +1,46 @@
+#galeria-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  justify-content: flex-start;
+  margin-top: 1.5em;
+}
+.producto-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  width: 200px;
+  padding: 1em;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 10px #0001;
+  transition: box-shadow 0.2s;
+}
+.producto-card:hover {
+  box-shadow: 0 4px 20px #0002;
+}
+.producto-card img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+}
+.producto-card h3 { margin: 0.2em 0 0.5em 0; font-size: 1.18em;}
+.producto-card .precio { color: #14c97c; font-weight: bold; font-size: 1.2em;}
+.producto-card .stock { color: #888; font-size: 0.95em;}
+.producto-card .comentarios { font-size: 0.98em; margin: 0.4em 0;}
+.producto-card .agregar-btn {
+  background: #14c97c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5em 1.1em;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 0.5em;
+  transition: background 0.2s;
+}
+.producto-card .agregar-btn:hover { background: #109357; }
 /* --- Todo el CSS del proyecto, responsive y visual --- */
 html { scroll-behavior: smooth; font-size: 17px; box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }

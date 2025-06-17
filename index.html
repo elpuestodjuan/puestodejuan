@@ -4,87 +4,306 @@
   <meta charset="UTF-8">
   <title>El puesto de Juan - Frutas y Verduras</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <!-- Fuentes y Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Montserrat:wght@900&display=swap" rel="stylesheet">
   <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
-  <link rel="stylesheet" href="estilos.css">
   <style>
-    /* Ventana flotante explicativa */
-    #explicativo-flotante {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 1500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(22,22,22,0.48);
-      transition: opacity 0.25s;
+    :root {
+      --verde-manzana: #8afc4d;
+      --verde-manzana-dark: #6ad135;
+      --verde-manzana-light: #bfff8d;
+      --negro: #1a1a1a;
+      --gris: #232323;
+      --blanco: #fff;
+      --sombra: 0 8px 32px #000b;
     }
-    #explicativo-flotante.oculto {
-      opacity: 0;
-      pointer-events: none;
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', Arial, sans-serif; background: var(--negro); margin: 0; color: var(--blanco);}
+    nav { background: var(--verde-manzana); color: var(--negro); box-shadow: 0 2px 10px #2228; position: sticky; top: 0; z-index: 100; }
+    .navbar-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.7em 1.3em; }
+    .navbar-logo { display: flex; align-items: center; gap: 0.7em;}
+    .navbar-logo img { height: 52px; margin-right: 0.7em; filter: drop-shadow(0 2px 12px #6ad13570);}
+    .navbar-title { font-family: 'Montserrat', Arial, sans-serif; font-weight: 900; font-size: 1.45em; letter-spacing: .02em; color: var(--negro);}
+    .navbar-menu { list-style: none; display: flex; gap: 1.3em; margin: 0; padding: 0; }
+    .navbar-menu li a { color: var(--negro); text-decoration: none; font-weight: 650; font-size: 1.13em; padding: 0.2em 0.6em; border-radius: 5px; transition: background 0.17s;}
+    .navbar-menu li a.active, .navbar-menu li a:hover { background: var(--verde-manzana-light); color: var(--negro);}
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.2em 1.4em; }
+    h2 { color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; margin-top: 2.1em; font-size:2em;}
+    /* HERO con efecto animado */
+    .hero-titulo {
+      display: block;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.4em;
+      font-weight: 900;
+      color: var(--verde-manzana);
+      margin: 1.6em 0 0.7em 0;
+      text-shadow: 0 5px 36px #6ad13555, 0 1.5px 0 #232323, 0 0 10px #8afc4d79;
+      letter-spacing: 0.01em;
+      position: relative;
+      animation: sombraBrilla 2s ease-in-out infinite alternate;
     }
-    .explicativo-box {
-      background: #fff;
-      border-radius: 13px;
-      padding: 2.2em 2em 2em 2em;
-      box-shadow: 0 8px 36px #2222;
+    @keyframes sombraBrilla {
+      0% { text-shadow: 0 5px 36px #6ad1353a, 0 1.5px 0 #232323, 0 0 10px #8afc4d46;}
+      80% { text-shadow: 0 8px 40px #8afc4d80, 0 2.5px 0 #232323, 0 0 20px #bfff8d;}
+      100% { text-shadow: 0 10px 52px #bfff8d, 0 3.5px 0 #232323, 0 0 32px #8afc4d;}
+    }
+    .wavy {
+      display: inline-block;
+      animation: wavy 2.4s infinite linear;
+      will-change: filter;
+    }
+    @keyframes wavy {
+      0%,100% { filter: brightness(1);}
+      47% { filter: brightness(1.23) drop-shadow(0 4px 16px #8afc4dc8);}
+      53% { filter: brightness(1.19) drop-shadow(0 6px 32px #bfff8d); }
+    }
+    .hero-image {
+      display: block;
+      margin: 2em auto 1.8em auto;
       max-width: 400px;
       width: 92vw;
-      text-align: left;
-      position: relative;
-      font-family: 'Open Sans', Arial, sans-serif;
-      animation: popIn 0.5s;
+      border-radius: 18px;
+      box-shadow: var(--sombra);
+      border: 1px solid var(--verde-manzana-dark);
     }
-    @keyframes popIn {
-      0% { transform: scale(0.85); opacity: 0;}
-      100% { transform: scale(1); opacity: 1;}
+    /* ========== NOSOTROS ========== */
+    .ventajas-grid {
+      display: flex;
+      gap: 1.8em;
+      margin: 2em 0 1em 0;
+      flex-wrap: wrap;
+      justify-content: flex-start;
     }
-    .explicativo-box h2 {
-      margin-top: 0;
-      font-size: 1.5em;
-      color: #14c97c;
+    .ventaja-card {
+      background: linear-gradient(135deg, var(--gris) 80%, var(--verde-manzana-dark) 100%);
+      border: 2px solid var(--verde-manzana);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #8afc4d22;
+      padding: 1.5em 1.2em;
+      text-align: center;
+      width: 250px;
+      color: var(--blanco);
+      transition: box-shadow .19s, transform .15s, border-color .18s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .ventaja-card img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1em;
+      box-shadow: 0 2px 12px #8afc4d22;
+      border: 2px solid var(--verde-manzana-dark);
+      background: var(--negro);
+    }
+    .ventaja-card h4 {
+      margin: 0.5em 0 0.3em 0;
+      font-size: 1.22em;
+      color: var(--verde-manzana);
       font-family: 'Montserrat', Arial, sans-serif;
-      margin-bottom: 0.4em;
+      font-weight: bold;
+      letter-spacing: 0.01em;
     }
-    .explicativo-box ul {
-      margin: 0 0 0.7em 0;
-      padding-left: 1.3em;
-      color: #353535;
-      font-size: 1.09em;
+    .ventaja-card p {
+      font-size: 1.04em;
+      color: #e0ffe4;
+      margin: 0;
+      line-height: 1.4;
     }
-    .explicativo-cerrar {
-      position: absolute;
-      top: 9px; right: 15px;
-      background: none;
+    /* ========== PRODUCTOS ========== */
+    #galeria-productos {
+      display: flex; flex-wrap: wrap; gap: 1.6em; justify-content: flex-start; margin-top: 1.6em;
+    }
+    .producto-card {
+      border: 2px solid var(--verde-manzana);
+      border-radius: 15px;
+      width: 215px;
+      padding: 1.2em 1em 1.4em 1em;
+      text-align: center;
+      background: linear-gradient(140deg, var(--gris) 80%, var(--verde-manzana-dark) 100%);
+      box-shadow: 0 2px 10px #8afc4d22;
+      transition: box-shadow .26s, transform .19s, border-color .18s;
+      display: flex; flex-direction: column; align-items: center; color: var(--blanco);
+      position: relative;
+    }
+    .producto-card:hover {
+      box-shadow: 0 10px 28px #8afc4d55, 0 1.5px 0 #232323;
+      border-color: var(--verde-manzana-light);
+      transform: translateY(-2px) scale(1.028);
+      z-index:3;
+    }
+    .producto-card img {
+      width: 100%; max-height: 120px; object-fit: cover; border-radius: 10px; margin-bottom: 0.7em; border: 1.5px solid var(--verde-manzana-dark);
+      background: var(--negro);
+      box-shadow: 0 4px 16px #8afc4d25;
+    }
+    .producto-card h3 { margin: 0.2em 0 0.5em 0; font-size: 1.16em;}
+    .producto-card .precio { color: var(--verde-manzana); font-weight: bold; font-size: 1.22em;}
+    .producto-card .stock { color: #c5ffc5; font-size: 0.97em;}
+    .producto-card .comentarios { font-size: 0.99em; margin: 0.4em 0;}
+    .producto-card .agregar-btn {
+      background: var(--verde-manzana-dark);
+      color: var(--negro);
       border: none;
-      font-size: 2em;
-      color: #fd9644;
+      border-radius: 6px;
+      padding: 0.53em 1.25em;
+      font-size: 1.09em;
       cursor: pointer;
-      line-height: 1;
-      transition: color 0.2s;
+      margin-top: 0.7em;
+      font-weight: 700;
+      box-shadow: 0 2px 10px #8afc4d11;
+      transition: background 0.18s, color 0.18s, box-shadow .21s, transform .17s;
     }
-    .explicativo-cerrar:hover { color: #fe7d23; }
+    .producto-card .agregar-btn:active {
+      background: var(--verde-manzana-light);
+      color: var(--negro);
+      transform: scale(0.96);
+      box-shadow: 0 1px 5px #8afc4d55;
+    }
+    .producto-card .agregar-btn:hover {
+      background: #bfff8d;
+      color: var(--negro);
+      box-shadow: 0 6px 22px #8afc4d88;
+    }
+    /* ========== CARRITO ========== */
+    #cart-floating-btn {
+      position:fixed;bottom:24px;right:24px;z-index:999;
+      background:var(--verde-manzana);color:var(--negro);border:none;border-radius:50%;
+      width:56px;height:56px;font-size:2em;box-shadow:0 2px 12px #8afc4d66;cursor:pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .18s, transform .17s;
+      outline: 2px solid var(--verde-manzana-light);
+    }
+    #cart-floating-btn.cart-anim {
+      animation: cartPop 0.42s;
+    }
+    @keyframes cartPop {
+      0% { transform: scale(1);}
+      30% { transform: scale(1.18);}
+      70% { transform: scale(0.90);}
+      100% { transform: scale(1);}
+    }
+    #cart-count {
+      font-size:0.7em;position:absolute;right:10px;top:10px;
+      background:var(--negro);color:var(--verde-manzana);border-radius:50%;padding:2px 7px;font-weight:bold;
+    }
+    #cart-panel {
+      display:none;position:fixed;bottom:0;right:0;width:340px;
+      background:var(--gris);box-shadow:-4px 0 24px #8afc4d55;z-index:1100;
+      padding:1.2em 1.5em;border-radius:16px 16px 0 0;
+      font-family: 'Open Sans',Arial,sans-serif; color:var(--blanco);
+    }
+    #cart-panel-close {
+      position:absolute;top:8px;right:14px;font-size:2em;background:none;border:none;color:var(--verde-manzana);cursor:pointer;
+    }
+    #cart-list { min-height: 48px; margin-bottom: 1em;}
+    #cart-list .item-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.4em 0; border-bottom: 1px solid var(--verde-manzana);
+    }
+    #cart-list .item-row:last-child { border-bottom: none; }
+    .cart-remove, .cart-minus, .cart-plus {
+      background: none; border: none; color: var(--verde-manzana); font-size: 1.2em; cursor: pointer; margin: 0 0.2em;
+    }
+    .cart-minus, .cart-plus { color: var(--verde-manzana-dark);}
+    #cart-total-row { display:flex;justify-content:space-between;font-weight:bold;margin:1em 0;}
+    #cart-panel-form input[type="text"] {
+      width: 100%; padding: 0.4em 0.6em; margin-bottom:0.6em; border:1px solid var(--verde-manzana-dark); border-radius:5px; background:var(--negro); color:var(--blanco);
+    }
+    #cart-panel-form input[type="radio"] {
+      width: 1.2em; height: 1.2em; accent-color: #8afc4d; outline: none; margin-right: 0.3em;
+    }
+    #cart-panel-form label[for="pago-efectivo"], #cart-panel-form label[for="pago-debito"] {
+      cursor:pointer;font-size:1.13em;color:var(--verde-manzana);margin-right:1.8em;display:inline-flex;align-items:center;
+    }
+    .cart-pay-btn {
+      background:var(--verde-manzana-dark);color:var(--negro);padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1.08em;cursor:pointer;margin-top:0.5em; font-weight:bold; display:block; width:100%;
+      transition: background 0.17s;
+    }
+    .cart-pay-btn:hover {
+      background: var(--verde-manzana-light);
+      color: var(--negro);
+    }
+    /* AVISO FLOTANTE, CONTACTO y RESPONSIVE igual que antes */
+    #explicativo-flotante { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1500; display: flex; align-items: center; justify-content: center; background: rgba(10,20,10,0.80); transition: opacity 0.25s;}
+    #explicativo-flotante.oculto { opacity: 0; pointer-events: none; }
+    .explicativo-box { background: var(--gris); border-radius: 13px; padding: 2.2em 2em 2em 2em; box-shadow: 0 8px 36px #8afc4d88; max-width: 400px; width: 92vw; text-align: left; position: relative; font-family: 'Open Sans', Arial, sans-serif; animation: popIn 0.5s; color:var(--blanco);}
+    @keyframes popIn { 0% { transform: scale(0.85); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+    .explicativo-box h2 { margin-top: 0; font-size: 1.5em; color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; margin-bottom: 0.4em; }
+    .explicativo-box ul { margin: 0 0 0.7em 0; padding-left: 1.3em; color: #e2ffe2; font-size: 1.09em; }
+    .explicativo-cerrar { position: absolute; top: 9px; right: 15px; background: none; border: none; font-size: 2em; color: var(--verde-manzana); cursor: pointer; line-height: 1; transition: color 0.2s;}
+    .explicativo-cerrar:hover { color: var(--verde-manzana-dark); }
+    footer { margin-top:3em; background:var(--verde-manzana); color:var(--negro); text-align:center; padding:1.2em; }
+
+    /* ============ RESPONSIVE PROFESIONAL ============ */
+
+    @media (max-width: 1000px) {
+      .container { max-width: 97vw; padding: 1em 0.6em; }
+      .navbar-container { max-width: 97vw; padding:0.7em 0.6em; }
+      .ventajas-grid, #galeria-productos { gap: 1em; }
+      .ventaja-card { width: 210px; }
+      .producto-card { width: 180px; }
+    }
+    @media (max-width: 700px) {
+      .navbar-container { flex-direction: column; gap: 0.7em; }
+      .navbar-menu { flex-direction: column; gap: 0.4em; align-items: flex-start; width: 100%; }
+      .navbar-logo { justify-content: center; width: 100%; }
+      .navbar-title { font-size: 1.1em; }
+      .container { padding: 1em 0.3em; }
+      #galeria-productos, .ventajas-grid { justify-content: center; }
+      .ventaja-card, .producto-card { width: 96vw; max-width: 330px; }
+      #cart-panel { width: 99vw; left:0; right:0; padding:1.2em 0.5em; }
+    }
+    @media (max-width: 510px) {
+      #cart-floating-btn { bottom: 10px; right: 10px; width: 48px; height: 48px; font-size: 1.3em; }
+      #cart-count { right: 7px; top: 7px; font-size:0.8em; }
+    }
     @media (max-width: 480px) {
-      .explicativo-box { padding: 1.2em 0.6em 1.7em 0.6em; }
+      .hero-titulo { font-size: 1.25em; }
+      h2 { font-size: 1.3em; }
+      .explicativo-box { padding: 1.2em 0.4em 1.5em 0.4em; }
+      .ventaja-card, .producto-card { padding: 1em 0.8em; font-size: 0.98em; }
+      .ventaja-card h4 { font-size: 1em; }
+      .producto-card h3 { font-size: 1em; }
+      .producto-card .precio { font-size: 1.05em; }
+      .contact-info, .contact-form { padding: 0.7em 0.3em; font-size: 0.97em; }
+      #cart-panel { padding: 1em 0.1em; }
+      .cart-pay-btn { font-size:1em; padding:0.6em 0; }
+    }
+    @media (max-width: 750px) {
+      .contact-row { flex-direction:column; gap: 1.2em; }
+      .contact-info, .contact-form { min-width: 0; width: 100%; max-width: 100vw; }
+      .contact-form, .contact-info { padding: 1.1em 0.6em; }
+    }
+    @media (max-width: 600px) {
+      footer { font-size: 0.93em; padding: 1em 0.2em; }
+    }
+    @media (max-width: 400px) {
+      #cart-panel { padding: 0.6em 0.1em; font-size: 0.94em; }
+      #cart-panel h4 { font-size: 1.1em; }
+      #cart-panel-form input[type="text"] { font-size: 0.97em; }
+    }
+    @media (max-width: 340px) {
+      .producto-card, .ventaja-card, .contact-info, .contact-form { font-size: 0.89em; }
+      #cart-panel { font-size: 0.89em; }
     }
   </style>
 </head>
 <body>
-  <!-- Ventana flotante explicativa -->
+  <!-- AVISO FLOTANTE INICIO -->
   <div id="explicativo-flotante">
     <div class="explicativo-box">
       <button class="explicativo-cerrar" id="cerrar-explicativo" aria-label="Cerrar">&times;</button>
-      <h2>¿Cómo comprar aquí?</h2>
+      <h2>¿Cómo comprar?</h2>
       <ul>
-        <li>Navegá el <b>listado</b> y agregá productos al carrito con el botón <i class="fa fa-cart-plus" style="color:#14c97c"></i>.</li>
-        <li>Revisá tu pedido en el <b>carrito</b> flotante abajo a la derecha.</li>
+        <li>Recorré el <b>listado</b> y agregá productos al <b>carrito</b> con el botón <i class="fa fa-cart-plus" style="color:var(--verde-manzana)"></i>.</li>
+        <li>Revisá tu pedido en el carrito flotante, abajo a la derecha.</li>
         <li>Completá tus datos, dirección y forma de pago.</li>
-        <li>¡Enviá el pedido por WhatsApp y te lo llevamos!</li>
+        <li>¡Enviá el pedido por WhatsApp y te lo llevamos a tu casa!</li>
       </ul>
-      <div style="font-size:0.95em;color:#888;margin-top:.5em;">
+      <div style="font-size:0.95em;color:#b5ffc2;margin-top:.5em;">
         <i class="fa fa-info-circle"></i>
         <span>Puedes volver a ver esta ayuda recargando la página.</span>
       </div>
@@ -97,9 +316,6 @@
         <img src="img/logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
         <span class="navbar-title">El puesto de Juan</span>
       </div>
-      <button class="navbar-toggle" id="navbarToggle" aria-label="Abrir menú">
-        <i class="fa fa-bars"></i>
-      </button>
       <ul class="navbar-menu" id="navbarMenu">
         <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
         <li><a href="#productos">Listado</a></li>
@@ -111,145 +327,30 @@
     </div>
   </nav>
   <div class="container">
-    <!-- HERO -->
+    <!-- HERO CON EFECTO ONDULADO -->
     <section id="inicio">
-      <div style="margin-bottom:1em;">
-        <span class="hero-titulo" id="heroTitulo">Frutas y verduras frescas y de temporada</span>
-      </div>
-      <p style="font-size:1.05em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
+      <span class="hero-titulo">
+        <span class="wavy">Frutas y verduras frescas y de temporada</span>
+      </span>
+      <p style="font-size:1.09em;max-width:660px;line-height:1.5;margin-left:auto;margin-right:auto;">
         Madrugamos en la huerta para llevar la mejor fruta y verdura directo a tu puerta.
         Nos dedicamos con pasión y alegría a la cosecha diaria, para que disfrutes productos frescos, sanos y de calidad en tu mesa.
         ¡Probá la diferencia!
       </p>
       <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
     </section>
-    <!-- LISTADO DE PRODUCTOS -->
+    <!-- LISTADO DE PRODUCTOS DESDE GOOGLE SHEETS -->
     <section id="productos">
       <h2>Listado de productos</h2>
-      <div id="productos-frutas">
-        <h3>Frutas</h3>
-        <div class="productos-grid" id="lista-frutas">
-          <div class="producto-card">
-            <img src="img/frutillas.png" alt="Frutillas">
-            <h3>Frutillas</h3>
-            <span class="precio">$180 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Frutillas',180,40,0)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/bananas.png" alt="Bananas">
-            <h3>Bananas</h3>
-            <span class="precio">$150 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Bananas',150,50,1)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/manzanas.png" alt="Manzanas">
-            <h3>Manzanas</h3>
-            <span class="precio">$120 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Manzanas',120,35,2)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/naranjas.png" alt="Naranjas">
-            <h3>Naranjas</h3>
-            <span class="precio">$110 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Naranjas',110,60,3)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/peras.png" alt="Peras">
-            <h3>Peras</h3>
-            <span class="precio">$130 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Peras',130,30,4)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/duraznos.png" alt="Duraznos">
-            <h3>Duraznos</h3>
-            <span class="precio">$160 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Duraznos',160,25,5)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/tomates.png" alt="Tomates">
-            <h3>Tomates</h3>
-            <span class="precio">$90 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Tomates',90,70,6)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-        </div>
+      <div style="background:#fff3cd;color:#856404;padding:1em 1.2em;border:1.5px solid #ffeeba;border-radius:6px;margin-bottom:1.5em;max-width:500px;">
+        <i class="fa fa-database" style="color:var(--verde-manzana)"></i>
+        Los productos se gestionan <b>desde una planilla de Google Sheets</b>.<br>
+        Si deseas agregar, quitar o modificar productos, hacelo directamente en la hoja compartida.<br>
+        Los cambios aparecerán aquí automáticamente.
       </div>
-      <div id="productos-verduras" style="margin-top:2.5em;">
-        <h3>Verduras</h3>
-        <div class="productos-grid" id="lista-verduras">
-          <div class="producto-card">
-            <img src="img/lechuga.png" alt="Lechuga">
-            <h3>Lechuga</h3>
-            <span class="precio">$60 <small class="unidad">/unidad</small></span>
-            <button class="agregar-btn" onclick="addToCart('Lechuga',60,55,7)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/zanahorias.png" alt="Zanahorias">
-            <h3>Zanahorias</h3>
-            <span class="precio">$80 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Zanahorias',80,80,8)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/papas.png" alt="Papas">
-            <h3>Papas</h3>
-            <span class="precio">$65 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Papas',65,100,9)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/boniatos.png" alt="Boniatos">
-            <h3>Boniatos</h3>
-            <span class="precio">$75 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Boniatos',75,40,10)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/morrones.png" alt="Morrones">
-            <h3>Morrones</h3>
-            <span class="precio">$100 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Morrones',100,28,11)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/acelga.png" alt="Acelga">
-            <h3>Acelga</h3>
-            <span class="precio">$55 <small class="unidad">/unidad</small></span>
-            <button class="agregar-btn" onclick="addToCart('Acelga',55,33,12)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-          <div class="producto-card">
-            <img src="img/berenjenas.png" alt="Berenjenas">
-            <h3>Berenjenas</h3>
-            <span class="precio">$95 <small class="unidad">/kg</small></span>
-            <button class="agregar-btn" onclick="addToCart('Berenjenas',95,36,13)">
-              <i class="fa fa-cart-plus"></i>Agregar
-            </button>
-          </div>
-        </div>
-      </div>
+      <div id="galeria-productos"></div>
     </section>
-    <!-- NOSOTROS -->
+    <!-- ========== NOSOTROS ========== -->
     <section id="nosotros">
       <h2>Nosotros</h2>
       <div class="ventajas-grid">
@@ -276,28 +377,27 @@
         </div>
       </div>
     </section>
-    <!-- CONTACTO -->
+    <!-- ========== CONTACTO ========== -->
     <section id="contacto">
       <h2>Contacto</h2>
       <div class="contact-row">
         <div class="contact-info">
-          <h3 style="margin-top:0;color:#14c97c;font-family:'Montserrat',Arial,sans-serif;">Datos de contacto</h3>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.9em;">
-            <li style="display:flex;align-items:center;gap:0.7em;font-size:1.06em;">
-              <i class="fa fa-map-marker-alt" style="color:#14c97c;font-size:1.4em;"></i>
-              <a href="https://www.google.com/maps?q=-34.5272,-56.2772" target="_blank" rel="noopener" style="color:#353535;text-decoration:underline;font-weight:600;">
+          <h3>Datos de contacto</h3>
+          <ul>
+            <li>
+              <i class="fa fa-map-marker-alt" style="color:var(--verde-manzana);font-size:1.4em;"></i>
+              <a href="https://www.google.com/maps?q=-34.5272,-56.2772" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
                 Canelones, Uruguay
               </a>
             </li>
           </ul>
-          <!-- Mapa debajo de Canelones, Uruguay -->
-          <div style="margin:18px 0 20px 32px;max-width:370px;">
+          <div style="margin:18px 0 20px 0;max-width:370px;">
             <a href="https://www.openstreetmap.org/?mlat=-34.5272&mlon=-56.2772#map=15/-34.5272/-56.2772" target="_blank" title="Ver ubicación en OpenStreetMap">
               <iframe
                 width="360"
                 height="210"
                 frameborder="0"
-                style="border:1.5px solid #fd9644;border-radius:8px;box-shadow:0 2px 10px #0001;"
+                style="border:1.5px solid var(--verde-manzana-dark);border-radius:8px;box-shadow:0 2px 10px #8afc4d44;"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=-56.2872,-34.5372,-56.2672,-34.5172&layer=mapnik&marker=-34.5272,-56.2772"
                 allowfullscreen
                 loading="lazy"
@@ -306,26 +406,26 @@
               ></iframe>
             </a>
           </div>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.9em;">
-            <li style="display:flex;align-items:center;gap:0.7em;font-size:1.06em;">
-              <i class="fa fa-phone" style="color:#fe7d23;font-size:1.3em;"></i>
-              <a href="tel:094691690" style="color:#353535;text-decoration:underline;font-weight:600;">094 691 690</a>
+          <ul>
+            <li>
+              <i class="fa fa-phone" style="color:var(--verde-manzana-dark);font-size:1.3em;"></i>
+              <a href="tel:094691690" style="color:var(--blanco);text-decoration:underline;font-weight:600;">094 691 690</a>
             </li>
-            <li style="display:flex;align-items:center;gap:0.7em;font-size:1.06em;">
-              <i class="fa fa-envelope" style="color:#fd9644;font-size:1.25em;"></i>
-              <a href="#contacto" id="focus-nombre" style="color:#353535;text-decoration:underline;font-weight:600;">
+            <li>
+              <i class="fa fa-envelope" style="color:var(--verde-manzana);font-size:1.25em;"></i>
+              <a href="mailto:info@elpuestodejuan.com" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
                 info@elpuestodejuan.com
               </a>
             </li>
-            <li style="display:flex;align-items:center;gap:0.7em;font-size:1.06em;">
-              <i class="fab fa-facebook-square" style="color:#1877f2;font-size:1.35em;"></i>
-              <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener" style="color:#353535;text-decoration:none;font-weight:600;">
+            <li>
+              <i class="fab fa-facebook-square" style="color:#8afc4d;font-size:1.35em;"></i>
+              <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
                 El puesto de Juan
               </a>
             </li>
-            <li style="display:flex;align-items:center;gap:0.7em;font-size:1.06em;">
-              <i class="fab fa-instagram" style="color:#c13584;font-size:1.35em;"></i>
-              <a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" style="color:#353535;text-decoration:none;font-weight:600;">
+            <li>
+              <i class="fab fa-instagram" style="color:#8afc4d;font-size:1.35em;"></i>
+              <a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
                 @elpuestodejuan
               </a>
             </li>
@@ -343,11 +443,11 @@
         </form>
       </div>
     </section>
+    <footer>
+      © 2025 El puesto de Juan. Todos los derechos reservados.
+    </footer>
   </div>
-  <footer>
-    © 2025 El puesto de Juan. Todos los derechos reservados.
-  </footer>
-  <!-- <audio id="bell-sound" src="img/bell.mp3" preload="auto"></audio> -->
+  <!-- Carrito flotante avanzado -->
   <button id="cart-floating-btn" title="Ver carrito">
     <i class="fa fa-shopping-cart"></i>
     <span id="cart-count">0</span>
@@ -360,58 +460,247 @@
       <span>Total:</span>
       <span id="cart-total">$0</span>
     </div>
-    <button id="cart-finish-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;display:none;">
+    <button id="cart-finish-btn">
       <i class="fab fa-whatsapp"></i> Finalizar compra
     </button>
     <form id="cart-panel-form" style="display:none;">
-      <input type="text" id="cart-client-name" placeholder="Tu nombre" required>
-      <div style="display:flex;align-items:center;gap:0.5em; margin-top:0.6em;">
-        <input type="text" id="cart-client-location" placeholder="Ubicación (escríbela o usa el botón)" required>
-        <button type="button" id="get-location-btn" style="background:#fe7d23;color:#fff;padding:0.47em 1.1em;border:none;border-radius:5px;font-size:1em;cursor:pointer;display:flex;align-items:center;gap:0.2em;" title="Abrir Google Maps y compartir ubicación">
-          <i class="fa fa-location-arrow"></i>
+      <div id="pago-step">
+        <div style="margin-bottom: 1.1em;">
+          <b style="font-size:1.13em;color:var(--verde-manzana);">Total:</b>
+          <span id="cart-total-checkout" style="font-size:1.13em;">$0</span>
+        </div>
+        <div style="margin-bottom:1.1em;">
+          <span style="font-weight:700;font-size:1.18em;color:var(--verde-manzana);display:block;margin-bottom:0.5em;">
+            ¿Cómo preferís pagar?
+          </span>
+          <label for="pago-efectivo"><input type="radio" name="pago" id="pago-efectivo" value="Efectivo" required> Efectivo</label>
+          <label for="pago-debito"><input type="radio" name="pago" id="pago-debito" value="Débito"> Débito</label>
+        </div>
+      </div>
+      <div id="datos-step" style="display:none;">
+        <input type="text" id="cart-client-name" placeholder="Tu nombre" required>
+        <input type="text" id="cart-client-location" placeholder="Tu dirección o ubicación" required>
+        <small id="location-help" style="color:var(--verde-manzana); font-size:0.96em;display:block;margin-bottom:0.4em;margin-top:0.2em;">
+          Es obligatorio indicar tu dirección o ubicación.
+        </small>
+        <button type="submit" class="cart-pay-btn">
+          <i class="fab fa-whatsapp"></i> Enviar pedido
         </button>
       </div>
-      <small id="location-help" style="color:#14c97c; font-size:0.96em;display:block;margin-bottom:0.4em;margin-top:0.2em;">
-        Es obligatorio indicar tu ubicación.
-      </small>
-      <div id="location-map-container" style="width:100%;margin-bottom:0.8em;display:none;">
-        <iframe
-          id="location-map"
-          width="100%"
-          height="180"
-          frameborder="0"
-          style="border:1px solid #fd9644;border-radius:10px;"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="">
-        </iframe>
-      </div>
-      <label style="margin-bottom:0.5em;margin-top:0.6em;">¿Cómo preferís pagar?</label>
-      <label><input type="radio" name="pago" value="Efectivo" class="cart-pay-radio" required> Efectivo</label>
-      <label><input type="radio" name="pago" value="Débito" class="cart-pay-radio"> Débito</label>
-      <button type="submit" class="cart-pay-btn" style="background:#25d366;color:#fff;padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1em;cursor:pointer;">
-        <i class="fab fa-whatsapp"></i> Enviar pedido
-      </button>
     </form>
   </div>
   <script>
-    // Explicativo flotante: cerrar al hacer click en botón o fondo
     document.addEventListener('DOMContentLoaded', function() {
       var exp = document.getElementById('explicativo-flotante');
       var btn = document.getElementById('cerrar-explicativo');
       btn.onclick = function() { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); };
-      exp.onclick = function(e) {
-        if(e.target === exp) { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); }
-      };
-      // Opcional: cerrar con Esc
+      exp.onclick = function(e) { if(e.target === exp) { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); } };
       document.addEventListener('keydown', function(ev) {
         if(ev.key === "Escape" && exp.style.display !== "none") {
           exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300);
         }
       });
+
+      // Contact form simple feedback
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(ev) {
+          ev.preventDefault();
+          const status = document.getElementById('contact-status');
+          status.textContent = "Enviando...";
+          fetch(contactForm.action, {
+            method: "POST",
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          }).then(response => {
+            if(response.ok) {
+              status.textContent = "¡Mensaje enviado! Te responderemos pronto.";
+              contactForm.reset();
+            } else {
+              status.textContent = "Ocurrió un error al enviar. Intenta más tarde.";
+            }
+          }).catch(() => {
+            status.textContent = "Ocurrió un error al enviar. Intenta más tarde.";
+          });
+        });
+      }
     });
+
+    // Carrito flotante avanzado
+    let cart = [];
+    const cartBtn = document.getElementById('cart-floating-btn');
+    const cartPanel = document.getElementById('cart-panel');
+    const cartClose = document.getElementById('cart-panel-close');
+    const cartList = document.getElementById('cart-list');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+    const cartFinish = document.getElementById('cart-finish-btn');
+    const cartForm = document.getElementById('cart-panel-form');
+    const cartPayBtn = cartForm.querySelector('.cart-pay-btn');
+    const clientName = document.getElementById('cart-client-name');
+    const clientLocation = document.getElementById('cart-client-location');
+    const cartCheckoutTotal = document.getElementById('cart-total-checkout');
+    const pagoStep = document.getElementById('pago-step');
+    const datosStep = document.getElementById('datos-step');
+    function updateCart() {
+      cartList.innerHTML = '';
+      let total = 0, count = 0;
+      cart.forEach((item, idx) => {
+        let subtotal = item.precio * item.cantidad;
+        total += subtotal;
+        count += item.cantidad;
+        const row = document.createElement('div');
+        row.className = 'item-row';
+        row.innerHTML = `
+          <span>
+            ${item.nombre}
+            <small style="color:var(--verde-manzana);">$${item.precio} c/u</small>
+            <small style="color:#b6ff8b;">Subt: $${subtotal}</small>
+          </span>
+          <div>
+            <button class="cart-minus" onclick="changeQty(${idx},-1)">-</button>
+            <span>${item.cantidad}</span>
+            <button class="cart-plus" onclick="changeQty(${idx},1)">+</button>
+            <button class="cart-remove" onclick="removeItem(${idx})" title="Quitar"><i class="fa fa-times"></i></button>
+          </div>
+        `;
+        cartList.appendChild(row);
+      });
+      cartCount.textContent = count;
+      cartTotal.textContent = "$" + total;
+      if(cartCheckoutTotal) cartCheckoutTotal.textContent = "$" + total;
+      cartFinish.style.display = cart.length ? "block" : "none";
+      cartForm.style.display = "none";
+      datosStep.style.display = "none";
+      pagoStep.style.display = "none";
+    }
+    function addToCart(nombre, precio) {
+      precio = Number(precio);
+      let found = cart.find(item => item.nombre === nombre);
+      if(found) found.cantidad++;
+      else cart.push({nombre, precio, cantidad:1});
+      updateCart();
+      cartBtn.classList.remove("cart-anim");
+      void cartBtn.offsetWidth;
+      cartBtn.classList.add("cart-anim");
+    }
+    function changeQty(idx, delta) {
+      cart[idx].cantidad += delta;
+      if(cart[idx].cantidad <= 0) { cart.splice(idx,1);}
+      updateCart();
+    }
+    function removeItem(idx) {
+      cart.splice(idx,1);
+      updateCart();
+    }
+    cartBtn.onclick = () => { cartPanel.style.display = "block"; }
+    cartClose.onclick = () => { cartPanel.style.display = "none"; }
+    window.addToCart = addToCart;
+    window.changeQty = changeQty;
+    window.removeItem = removeItem;
+    updateCart();
+
+    // Multi-step: pago > datos (como tus imágenes)
+    cartFinish.onclick = function() {
+      if (!cart.length) return;
+      updateCart();
+      cartForm.style.display = "block";
+      cartFinish.style.display = "none";
+      pagoStep.style.display = "block";
+      datosStep.style.display = "none";
+      cartForm.querySelectorAll('input[name="pago"]').forEach(r=>r.checked=false);
+      clientName.value = "";
+      clientLocation.value = "";
+    };
+    cartForm.querySelectorAll('input[name="pago"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        pagoStep.style.display = "none";
+        datosStep.style.display = "block";
+        setTimeout(()=>clientName.focus(), 120);
+      });
+    });
+
+    cartForm.onsubmit = function(e) {
+      e.preventDefault();
+      if (!cart.length) return;
+      let nombre = clientName.value.trim();
+      let ubicacion = clientLocation.value.trim();
+      let pago = cartForm.querySelector('input[name="pago"]:checked')?.value || '';
+      if(!pago) {
+        alert("Por favor elegí una forma de pago.");
+        return;
+      }
+      if(!nombre || !ubicacion) {
+        alert("Por favor completá tu nombre y dirección o ubicación.");
+        return;
+      }
+      let pedido = `¡Hola! Quiero pedir:\n`;
+      cart.forEach(item => {
+        pedido += `- ${item.cantidad} x ${item.nombre} ($${item.precio} c/u, Subtotal $${item.precio*item.cantidad})\n`;
+      });
+      pedido += `Total: $${cart.reduce((t,i)=>t+i.precio*i.cantidad,0)}\n`;
+      pedido += `\nMi nombre: ${nombre}\nDirección/Ubicación: ${ubicacion}\nForma de pago: ${pago}\n`;
+      const url = "https://wa.me/59894691690?text=" + encodeURIComponent(pedido);
+      window.open(url, "_blank");
+      cart = [];
+      updateCart();
+      cartForm.reset();
+      cartForm.style.display = "none";
+      cartPanel.style.display = "none";
+    };
+
+    // Productos desde Google Sheets
+    const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-3gs5qzWpdvrI6kGzbqYTXKGIXZvzZdmI_gIvsbthekxpYamA-IP3NdqWgPzmLqFF5U56AN7kA80e/pub?gid=1824323229&single=true&output=csv';
+    fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(csvURL))
+      .then(response => response.text())
+      .then(csv => {
+        const rows = [];
+        let insideQuotes = false, row = [], cell = '';
+        for (let i = 0; i < csv.length; i++) {
+          const char = csv[i], next = csv[i+1];
+          if(char === '"' && insideQuotes && next === '"') { cell += '"'; i++; }
+          else if(char === '"') insideQuotes = !insideQuotes;
+          else if(char === ',' && !insideQuotes) { row.push(cell); cell = ''; }
+          else if((char === '\n' || char === '\r') && !insideQuotes) {
+            if(cell || row.length>0) { row.push(cell); rows.push(row); cell = ''; row=[]; }
+            if(char === '\r' && next === '\n') i++;
+          }
+          else cell += char;
+        }
+        if(cell || row.length>0) { row.push(cell); rows.push(row); }
+        const headers = rows[0].map(h=>h.trim().toLowerCase());
+        const productos = rows.slice(1).map(fila => {
+          let obj = {};
+          fila.forEach((valor, i) => obj[headers[i]] = valor ? valor.trim() : '');
+          return obj;
+        });
+        renderGaleria(productos);
+      })
+      .catch(err => {
+        document.getElementById('galeria-productos').innerHTML = '<p>No se pudieron cargar los productos.</p>';
+        console.error(err);
+      });
+
+    function renderGaleria(productos) {
+      const galeria = document.getElementById('galeria-productos');
+      galeria.innerHTML = '';
+      productos.forEach(producto => {
+        if (producto.activo && producto.activo.replace(/[\s\u00a0]/g,'').toLowerCase() !== 'sí') return;
+        const card = document.createElement('div');
+        card.className = 'producto-card';
+        card.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <h3>${producto.nombre}</h3>
+          <span class="precio">$${producto.precio}</span>
+          <small class="stock">Stock: ${producto.stock}</small>
+          <p class="comentarios">${producto.comentarios || ''}</p>
+          <button class="agregar-btn" onclick="addToCart('${producto.nombre}', ${producto.precio})">
+            <i class="fa fa-cart-plus"></i>Agregar
+          </button>
+        `;
+        galeria.appendChild(card);
+      });
+    }
   </script>
-  <script src="main.js"></script>
 </body>
 </html>
