@@ -8,15 +8,6 @@
   <meta name="keywords" content="frutas, verduras, frescas, chacra, directo, productor, canelones, uruguay, natural, productos, envío, domicilio">
   <meta name="author" content="El puesto de Juan">
   <meta name="theme-color" content="#8afc4d">
-  <meta property="og:title" content="El puesto de Juan - Frutas y Verduras">
-  <meta property="og:description" content="Frutas y verduras frescas, directo del productor a tu mesa en Canelones, Uruguay.">
-  <meta property="og:image" content="https://elpuestodjuan.com/img/portada.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://elpuestodjuan.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="El puesto de Juan - Frutas y Verduras">
-  <meta name="twitter:description" content="Frutas y verduras frescas, directo del productor a tu mesa en Canelones, Uruguay.">
-  <meta name="twitter:image" content="https://elpuestodjuan.com/img/portada.png">
   <link rel="icon" href="img/favicon.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -34,7 +25,6 @@
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Open Sans', Arial, sans-serif; background: var(--negro); margin: 0; color: var(--blanco);}
-    /* NAVBAR */
     nav { background: var(--verde-manzana); color: var(--negro); box-shadow: 0 2px 10px #2228; position: sticky; top: 0; z-index: 100; }
     .navbar-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0.7em 1.3em; position: relative;}
     .navbar-logo { display: flex; align-items: center; gap: 0.7em;}
@@ -72,20 +62,11 @@
       .navbar-logo img { height: 38px;}
       .navbar-title { font-size: 1em;}
     }
-    /* HERO */
     .container { max-width: 1200px; margin: 0 auto; padding: 1.2em 1.4em; }
-    #inicio {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    #inicio { text-align: center; display: flex; flex-direction: column; align-items: center; }
     .hero-titulo {
-      display: block;
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-size: 2.4em;
-      font-weight: 900;
-      color: var(--verde-manzana);
+      display: block; font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.4em; font-weight: 900; color: var(--verde-manzana);
       margin: 1.6em 0 0.7em 0;
       text-shadow: 0 5px 36px #6ad13555, 0 1.5px 0 #232323, 0 0 10px #8afc4d79;
       letter-spacing: 0.01em;
@@ -112,14 +93,8 @@
       box-shadow: var(--sombra);
       border: 1px solid var(--verde-manzana-dark);
     }
-    #inicio p {
-      font-size:1.09em;
-      max-width:660px;
-      line-height:1.5;
-      margin:0 auto;
-    }
+    #inicio p { font-size:1.09em; max-width:660px; line-height:1.5; margin:0 auto; }
     h2 { color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; margin-top: 2.1em; font-size:2em;}
-    /* PRODUCTOS */
     #galeria-productos { display: flex; flex-wrap: wrap; gap: 1.6em; justify-content: flex-start; margin-top: 1.6em;}
     .producto-card {
       border: 2px solid var(--verde-manzana);
@@ -158,7 +133,6 @@
     .producto-card .agregar-btn:hover {
       background: #bfff8d; color: var(--negro); box-shadow: 0 6px 22px #8afc4d88;
     }
-    /* NOSOTROS */
     .ventajas-grid { display: flex; gap: 1.8em; margin: 2em 0 1em 0; flex-wrap: wrap; justify-content: flex-start;}
     .ventaja-card {
       background: linear-gradient(135deg, var(--gris) 80%, var(--verde-manzana-dark) 100%);
@@ -177,7 +151,6 @@
       margin: 0.5em 0 0.3em 0; font-size: 1.22em; color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; letter-spacing: 0.01em;
     }
     .ventaja-card p { font-size: 1.04em; color: #e0ffe4; margin: 0; line-height: 1.4;}
-    /* CONTACTO */
     .contact-row { display: flex; gap: 2em; margin-top: 2em; }
     .contact-info { min-width: 270px; }
     .contact-info ul { list-style: none; padding: 0; margin: 0; }
@@ -193,9 +166,7 @@
     }
     .contact-form button:hover { background: var(--verde-manzana-light);}
     #contact-status { min-height: 1.3em; font-size: 0.97em; color: var(--verde-manzana);}
-    /* FOOTER */
     footer { margin-top:3em; background:var(--verde-manzana); color:var(--negro); text-align:center; padding:1.2em; }
-    /* CARRITO */
     #cart-floating-btn {
       position:fixed;bottom:24px;right:24px;z-index:999;
       background:var(--verde-manzana);color:var(--negro);border:none;border-radius:50%;
@@ -252,7 +223,61 @@
       background: var(--verde-manzana-light);
       color: var(--negro);
     }
-    /* RESPONSIVE */
+    #explicativo-flotante {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(34, 34, 34, 0.82);
+      transition: opacity 0.25s;
+    }
+    #explicativo-flotante.oculto {
+      opacity: 0; pointer-events: none;
+    }
+    .explicativo-box {
+      background: var(--negro);
+      border-radius: 15px;
+      padding: 2.1em 2em 2em 2em;
+      box-shadow: 0 8px 36px #23232388;
+      max-width: 415px; width: 95vw;
+      text-align: left;
+      position: relative;
+      font-family: 'Open Sans', Arial, sans-serif;
+      animation: popIn 0.5s;
+      border: 2.5px solid var(--verde-manzana);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.88); opacity: 0;}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    .explicativo-box h2 {
+      margin-top: 0;
+      font-size: 1.6em;
+      color: var(--verde-manzana);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 0.4em;
+      letter-spacing: .01em;
+    }
+    .explicativo-box ul {
+      margin: 0 0 0.7em 0;
+      padding-left: 1.3em;
+      color: var(--blanco);
+      font-size: 1.10em;
+    }
+    .explicativo-box li {
+      margin-bottom: .5em;
+      line-height: 1.5;
+    }
+    .explicativo-cerrar {
+      position: absolute; top: 9px; right: 15px;
+      background: none; border: none;
+      font-size: 2em; color: var(--verde-manzana-dark);
+      cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+    .explicativo-cerrar:hover { color: var(--verde-manzana); }
     @media (max-width: 1000px) {
       .container { max-width: 97vw; padding: 1em 0.6em; }
       .navbar-container { max-width: 97vw; padding:0.7em 0.6em; }
@@ -284,16 +309,112 @@
       #cart-panel { padding: 1em 0.1em; }
       .cart-pay-btn { font-size:1em; padding:0.6em 0; }
       footer { font-size: 0.93em; padding: 1em 0.2em; }
-    }
-    @media (max-width: 510px) {
-      #cart-floating-btn { bottom: 10px; right: 10px; width: 48px; height: 48px; font-size: 1.3em; }
-      #cart-count { right: 7px; top: 7px; font-size:0.8em; }
-      .navbar-logo img { height: 38px;}
-      .navbar-title { font-size: 1em;}
+      .explicativo-box { padding: 1.2em 0.6em 1.5em 0.6em; font-size: .97em;}
+      .explicativo-box h2 { font-size: 1.15em;}
     }
   </style>
 </head>
 <body>
+<!-- Ventana flotante explicativa -->
+<div id="explicativo-flotante">
+  <div class="explicativo-box">
+    <button class="explicativo-cerrar" id="cerrar-explicativo" aria-label="Cerrar">&times;</button>
+    <h2>¿Cómo comprar aquí?</h2>
+    <ul>
+      <li>Navegá el <b>listado</b> y agregá productos al carrito con el botón <i class="fa fa-cart-plus" style="color:var(--verde-manzana)"></i>.</li>
+      <li>Revisá tu pedido en el <b>carrito</b> flotante abajo a la derecha.</li>
+      <li>Completá tus datos, dirección y forma de pago.</li>
+      <li>¡Enviá el pedido por WhatsApp y te lo llevamos!</li>
+    </ul>
+    <div style="font-size:0.97em;color:var(--verde-manzana-dark);margin-top:.7em;display:flex;align-items:center;gap:.5em;">
+      <i class="fa fa-info-circle" style="color:var(--verde-manzana)"></i>
+      <span>Puedes volver a ver esta ayuda recargando la página.</span>
+    </div>
+  </div>
+</div>
+<style>
+#explicativo-flotante {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 34, 34, 0.82);
+  transition: opacity 0.25s;
+}
+#explicativo-flotante.oculto {
+  opacity: 0; pointer-events: none;
+}
+.explicativo-box {
+  background: var(--negro);
+  border-radius: 15px;
+  padding: 2.1em 2em 2em 2em;
+  box-shadow: 0 8px 36px #23232388;
+  max-width: 415px; width: 95vw;
+  text-align: left;
+  position: relative;
+  font-family: 'Open Sans', Arial, sans-serif;
+  animation: popIn 0.5s;
+  border: 2.5px solid var(--verde-manzana);
+}
+@keyframes popIn {
+  0% { transform: scale(0.88); opacity: 0;}
+  100% { transform: scale(1); opacity: 1;}
+}
+.explicativo-box h2 {
+  margin-top: 0;
+  font-size: 1.6em;
+  color: var(--verde-manzana);
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin-bottom: 0.4em;
+  letter-spacing: .01em;
+}
+.explicativo-box ul {
+  margin: 0 0 0.7em 0;
+  padding-left: 1.3em;
+  color: var(--blanco);
+  font-size: 1.10em;
+}
+.explicativo-box li {
+  margin-bottom: .5em;
+  line-height: 1.5;
+}
+.explicativo-cerrar {
+  position: absolute; top: 9px; right: 15px;
+  background: none; border: none;
+  font-size: 2em; color: var(--verde-manzana-dark);
+  cursor: pointer; line-height: 1;
+  transition: color 0.2s;
+}
+.explicativo-cerrar:hover { color: var(--verde-manzana); }
+@media (max-width: 520px) {
+  .explicativo-box { padding: 1.2em 0.6em 1.5em 0.6em; font-size: .97em;}
+  .explicativo-box h2 { font-size: 1.15em;}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var exp = document.getElementById('explicativo-flotante');
+  var btn = document.getElementById('cerrar-explicativo');
+  if(btn) btn.onclick = function() {
+    exp.classList.add('oculto');
+    setTimeout(()=>exp.style.display="none",250);
+  };
+  exp.onclick = function(e) {
+    if(e.target === exp) {
+      exp.classList.add('oculto');
+      setTimeout(()=>exp.style.display="none",250);
+    }
+  };
+  document.addEventListener('keydown', function(ev) {
+    if(ev.key === "Escape" && exp.style.display !== "none") {
+      exp.classList.add('oculto');
+      setTimeout(()=>exp.style.display="none",250);
+    }
+  });
+});
+</script>
   <!-- NAVBAR -->
   <nav>
     <div class="navbar-container">
@@ -484,6 +605,31 @@
     </form>
   </div>
   <script>
+    // Explicativo flotante: solo primera vez
+    document.addEventListener('DOMContentLoaded', function() {
+      var exp = document.getElementById('explicativo-flotante');
+      var btn = document.getElementById('cerrar-explicativo');
+      if(localStorage.getItem('explicativoVisto') === '1') {
+        exp.style.display = 'none';
+      }
+      if(btn) btn.onclick = function() {
+        exp.classList.add('oculto');
+        setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
+      };
+      exp.onclick = function(e) {
+        if(e.target === exp) {
+          exp.classList.add('oculto');
+          setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
+        }
+      };
+      document.addEventListener('keydown', function(ev) {
+        if(ev.key === "Escape" && exp.style.display !== "none") {
+          exp.classList.add('oculto');
+          setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
+        }
+      });
+    });
+
     // NAVBAR hamburguesa
     const burger = document.getElementById('navbarBurger');
     const menu = document.getElementById('navbarMenu');
