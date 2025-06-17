@@ -4,10 +4,24 @@
   <meta charset="UTF-8">
   <title>El puesto de Juan - Frutas y Verduras</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio.">
-  <link rel="icon" href="img/favicon.png" sizes="32x32">
+  <meta name="description" content="Frutas y verduras frescas, directo del productor a tu mesa. Pedí productos seleccionados. Envíos a domicilio en Canelones, Uruguay.">
+  <meta name="keywords" content="frutas, verduras, frescas, chacra, directo, productor, canelones, uruguay, natural, productos, envío, domicilio">
+  <meta name="author" content="El puesto de Juan">
+  <meta name="theme-color" content="#8afc4d">
+  <meta property="og:title" content="El puesto de Juan - Frutas y Verduras">
+  <meta property="og:description" content="Frutas y verduras frescas, directo del productor a tu mesa en Canelones, Uruguay.">
+  <meta property="og:image" content="https://elpuestodjuan.com/img/portada.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elpuestodjuan.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="El puesto de Juan - Frutas y Verduras">
+  <meta name="twitter:description" content="Frutas y verduras frescas, directo del productor a tu mesa en Canelones, Uruguay.">
+  <meta name="twitter:image" content="https://elpuestodjuan.com/img/portada.png">
+  <link rel="icon" href="img/favicon.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700|Rye&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --verde-manzana: #8afc4d;
@@ -105,85 +119,6 @@
       margin:0 auto;
     }
     h2 { color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; margin-top: 2.1em; font-size:2em;}
-    /* AVISO FLOTANTE */
-    #explicativo-flotante {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1500;
-      display: flex; align-items: center; justify-content: center; background: rgba(10,20,10,0.80); transition: opacity 0.25s;
-    }
-    #explicativo-flotante.oculto { opacity: 0; pointer-events: none; }
-    .explicativo-box {
-      background: var(--gris); border-radius: 13px; padding: 2.2em 2em 2em 2em;
-      box-shadow: 0 8px 36px #8afc4d88; max-width: 400px; width: 92vw; text-align: left; position: relative;
-      font-family: 'Open Sans', Arial, sans-serif; animation: popIn 0.5s; color:var(--blanco);
-    }
-    @keyframes popIn { 0% { transform: scale(0.85); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
-    .explicativo-box h2 { margin-top: 0; font-size: 1.5em; color: var(--verde-manzana); font-family: 'Montserrat', Arial, sans-serif; margin-bottom: 0.4em; }
-    .explicativo-box ul { margin: 0 0 0.7em 0; padding-left: 1.3em; color: #e2ffe2; font-size: 1.09em; }
-    .explicativo-cerrar { position: absolute; top: 9px; right: 15px; background: none; border: none; font-size: 2em; color: var(--verde-manzana); cursor: pointer; line-height: 1; transition: color 0.2s;}
-    .explicativo-cerrar:hover { color: var(--verde-manzana-dark); }
-    @media (max-width: 480px) {
-      .explicativo-box { padding: 1.2em 0.4em 1.5em 0.4em; }
-    }
-    /* Resto de estilos (carrito, productos, nosotros, contacto, footer, responsive) igual que antes... */
-    /* CARRITO */
-    #cart-floating-btn {
-      position:fixed;bottom:24px;right:24px;z-index:999;
-      background:var(--verde-manzana);color:var(--negro);border:none;border-radius:50%;
-      width:56px;height:56px;font-size:2em;box-shadow:0 2px 12px #8afc4d66;cursor:pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .18s, transform .17s;
-      outline: 2px solid var(--verde-manzana-light);
-    }
-    #cart-floating-btn.cart-anim {
-      animation: cartPop 0.42s;
-    }
-    @keyframes cartPop {
-      0% { transform: scale(1);}
-      30% { transform: scale(1.18);}
-      70% { transform: scale(0.90);}
-      100% { transform: scale(1);}
-    }
-    #cart-count {
-      font-size:0.7em;position:absolute;right:10px;top:10px;
-      background:var(--negro);color:var(--verde-manzana);border-radius:50%;padding:2px 7px;font-weight:bold;
-    }
-    #cart-panel {
-      display:none;position:fixed;bottom:0;right:0;width:340px;
-      background:var(--gris);box-shadow:-4px 0 24px #8afc4d55;z-index:1100;
-      padding:1.2em 1.5em;border-radius:16px 16px 0 0;
-      font-family: 'Open Sans',Arial,sans-serif; color:var(--blanco);
-    }
-    #cart-panel-close {
-      position:absolute;top:8px;right:14px;font-size:2em;background:none;border:none;color:var(--verde-manzana);cursor:pointer;
-    }
-    #cart-list { min-height: 48px; margin-bottom: 1em;}
-    #cart-list .item-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.4em 0; border-bottom: 1px solid var(--verde-manzana);
-    }
-    #cart-list .item-row:last-child { border-bottom: none; }
-    .cart-remove, .cart-minus, .cart-plus {
-      background: none; border: none; color: var(--verde-manzana); font-size: 1.2em; cursor: pointer; margin: 0 0.2em;
-    }
-    .cart-minus, .cart-plus { color: var(--verde-manzana-dark);}
-    #cart-total-row { display:flex;justify-content:space-between;font-weight:bold;margin:1em 0;}
-    #cart-panel-form input[type="text"] {
-      width: 100%; padding: 0.4em 0.6em; margin-bottom:0.6em; border:1px solid var(--verde-manzana-dark); border-radius:5px; background:var(--negro); color:var(--blanco);
-    }
-    #cart-panel-form input[type="radio"] {
-      width: 1.2em; height: 1.2em; accent-color: #8afc4d; outline: none; margin-right: 0.3em;
-    }
-    #cart-panel-form label[for="pago-efectivo"], #cart-panel-form label[for="pago-debito"] {
-      cursor:pointer;font-size:1.13em;color:var(--verde-manzana);margin-right:1.8em;display:inline-flex;align-items:center;
-    }
-    .cart-pay-btn {
-      background:var(--verde-manzana-dark);color:var(--negro);padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1.08em;cursor:pointer;margin-top:0.5em; font-weight:bold; display:block; width:100%;
-      transition: background 0.17s;
-    }
-    .cart-pay-btn:hover {
-      background: var(--verde-manzana-light);
-      color: var(--negro);
-    }
     /* PRODUCTOS */
     #galeria-productos { display: flex; flex-wrap: wrap; gap: 1.6em; justify-content: flex-start; margin-top: 1.6em;}
     .producto-card {
@@ -260,7 +195,64 @@
     #contact-status { min-height: 1.3em; font-size: 0.97em; color: var(--verde-manzana);}
     /* FOOTER */
     footer { margin-top:3em; background:var(--verde-manzana); color:var(--negro); text-align:center; padding:1.2em; }
-    /* RESPONSIVE igual que en respuestas anteriores... */
+    /* CARRITO */
+    #cart-floating-btn {
+      position:fixed;bottom:24px;right:24px;z-index:999;
+      background:var(--verde-manzana);color:var(--negro);border:none;border-radius:50%;
+      width:56px;height:56px;font-size:2em;box-shadow:0 2px 12px #8afc4d66;cursor:pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .18s, transform .17s;
+      outline: 2px solid var(--verde-manzana-light);
+    }
+    #cart-floating-btn.cart-anim { animation: cartPop 0.42s;}
+    @keyframes cartPop {
+      0% { transform: scale(1);}
+      30% { transform: scale(1.18);}
+      70% { transform: scale(0.90);}
+      100% { transform: scale(1);}
+    }
+    #cart-count {
+      font-size:0.7em;position:absolute;right:10px;top:10px;
+      background:var(--negro);color:var(--verde-manzana);border-radius:50%;padding:2px 7px;font-weight:bold;
+    }
+    #cart-panel {
+      display:none;position:fixed;bottom:0;right:0;width:340px;
+      background:var(--gris);box-shadow:-4px 0 24px #8afc4d55;z-index:1100;
+      padding:1.2em 1.5em;border-radius:16px 16px 0 0;
+      font-family: 'Open Sans',Arial,sans-serif; color:var(--blanco);
+    }
+    #cart-panel-close {
+      position:absolute;top:8px;right:14px;font-size:2em;background:none;border:none;color:var(--verde-manzana);cursor:pointer;
+    }
+    #cart-list { min-height: 48px; margin-bottom: 1em;}
+    #cart-list .item-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.4em 0; border-bottom: 1px solid var(--verde-manzana);
+    }
+    #cart-list .item-row:last-child { border-bottom: none; }
+    .cart-remove, .cart-minus, .cart-plus {
+      background: none; border: none; color: var(--verde-manzana); font-size: 1.2em; cursor: pointer; margin: 0 0.2em;
+    }
+    .cart-minus, .cart-plus { color: var(--verde-manzana-dark);}
+    #cart-total-row { display:flex;justify-content:space-between;font-weight:bold;margin:1em 0;}
+    #cart-panel-form input[type="text"] {
+      width: 100%; padding: 0.4em 0.6em; margin-bottom:0.6em; border:1px solid var(--verde-manzana-dark); border-radius:5px; background:var(--negro); color:var(--blanco);
+    }
+    #cart-panel-form input[type="radio"] {
+      width: 1.2em; height: 1.2em; accent-color: #8afc4d; outline: none; margin-right: 0.3em;
+    }
+    #cart-panel-form label[for="pago-efectivo"], #cart-panel-form label[for="pago-debito"] {
+      cursor:pointer;font-size:1.13em;color:var(--verde-manzana);margin-right:1.8em;display:inline-flex;align-items:center;
+    }
+    .cart-pay-btn {
+      background:var(--verde-manzana-dark);color:var(--negro);padding:0.7em 1.4em;border:none;border-radius:5px;font-size:1.08em;cursor:pointer;margin-top:0.5em; font-weight:bold; display:block; width:100%;
+      transition: background 0.17s;
+    }
+    .cart-pay-btn:hover {
+      background: var(--verde-manzana-light);
+      color: var(--negro);
+    }
+    /* RESPONSIVE */
     @media (max-width: 1000px) {
       .container { max-width: 97vw; padding: 1em 0.6em; }
       .navbar-container { max-width: 97vw; padding:0.7em 0.6em; }
@@ -293,26 +285,15 @@
       .cart-pay-btn { font-size:1em; padding:0.6em 0; }
       footer { font-size: 0.93em; padding: 1em 0.2em; }
     }
+    @media (max-width: 510px) {
+      #cart-floating-btn { bottom: 10px; right: 10px; width: 48px; height: 48px; font-size: 1.3em; }
+      #cart-count { right: 7px; top: 7px; font-size:0.8em; }
+      .navbar-logo img { height: 38px;}
+      .navbar-title { font-size: 1em;}
+    }
   </style>
 </head>
 <body>
-  <!-- AVISO FLOTANTE INICIO -->
-  <div id="explicativo-flotante">
-    <div class="explicativo-box">
-      <button class="explicativo-cerrar" id="cerrar-explicativo" aria-label="Cerrar">&times;</button>
-      <h2>¿Cómo comprar?</h2>
-      <ul>
-        <li>Recorré el <b>listado</b> y agregá productos al <b>carrito</b> con el botón <i class="fa fa-cart-plus" style="color:var(--verde-manzana)"></i>.</li>
-        <li>Revisá tu pedido en el carrito flotante, abajo a la derecha.</li>
-        <li>Completá tus datos, dirección y forma de pago.</li>
-        <li>¡Enviá el pedido por WhatsApp y te lo llevamos a tu casa!</li>
-      </ul>
-      <div style="font-size:0.95em;color:#b5ffc2;margin-top:.5em;">
-        <i class="fa fa-info-circle"></i>
-        <span>Puedes volver a ver esta ayuda recargando la página.</span>
-      </div>
-    </div>
-  </div>
   <!-- NAVBAR -->
   <nav>
     <div class="navbar-container">
@@ -503,19 +484,6 @@
     </form>
   </div>
   <script>
-    // AVISO FLOTANTE INICIO
-    document.addEventListener('DOMContentLoaded', function() {
-      var exp = document.getElementById('explicativo-flotante');
-      var btn = document.getElementById('cerrar-explicativo');
-      btn.onclick = function() { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); };
-      exp.onclick = function(e) { if(e.target === exp) { exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300); } };
-      document.addEventListener('keydown', function(ev) {
-        if(ev.key === "Escape" && exp.style.display !== "none") {
-          exp.classList.add('oculto'); setTimeout(()=>exp.style.display="none",300);
-        }
-      });
-    });
-
     // NAVBAR hamburguesa
     const burger = document.getElementById('navbarBurger');
     const menu = document.getElementById('navbarMenu');
@@ -706,7 +674,7 @@
       cartPanel.style.display = "none";
     };
 
-    // Productos desde Google Sheets (CSV público)
+    // Productos desde Google Sheets
     const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-3gs5qzWpdvrI6kGzbqYTXKGIXZvzZdmI_gIvsbthekxpYamA-IP3NdqWgPzmLqFF5U56AN7kA80e/pub?gid=1824323229&single=true&output=csv';
     fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(csvURL))
       .then(response => response.text())
