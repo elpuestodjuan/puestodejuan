@@ -73,6 +73,7 @@
       position: relative;
       animation: sombraBrilla 2s ease-in-out infinite alternate;
     }
+    #heroTitulo { transition: opacity 0.4s; }
     @keyframes sombraBrilla {
       0% { text-shadow: 0 5px 36px #6ad1353a, 0 1.5px 0 #232323, 0 0 10px #8afc4d46;}
       80% { text-shadow: 0 8px 40px #8afc4d80, 0 2.5px 0 #232323, 0 0 20px #bfff8d;}
@@ -332,545 +333,471 @@
     </div>
   </div>
 </div>
-<style>
-#explicativo-flotante {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(34, 34, 34, 0.82);
-  transition: opacity 0.25s;
-}
-#explicativo-flotante.oculto {
-  opacity: 0; pointer-events: none;
-}
-.explicativo-box {
-  background: var(--negro);
-  border-radius: 15px;
-  padding: 2.1em 2em 2em 2em;
-  box-shadow: 0 8px 36px #23232388;
-  max-width: 415px; width: 95vw;
-  text-align: left;
-  position: relative;
-  font-family: 'Open Sans', Arial, sans-serif;
-  animation: popIn 0.5s;
-  border: 2.5px solid var(--verde-manzana);
-}
-@keyframes popIn {
-  0% { transform: scale(0.88); opacity: 0;}
-  100% { transform: scale(1); opacity: 1;}
-}
-.explicativo-box h2 {
-  margin-top: 0;
-  font-size: 1.6em;
-  color: var(--verde-manzana);
-  font-family: 'Montserrat', Arial, sans-serif;
-  margin-bottom: 0.4em;
-  letter-spacing: .01em;
-}
-.explicativo-box ul {
-  margin: 0 0 0.7em 0;
-  padding-left: 1.3em;
-  color: var(--blanco);
-  font-size: 1.10em;
-}
-.explicativo-box li {
-  margin-bottom: .5em;
-  line-height: 1.5;
-}
-.explicativo-cerrar {
-  position: absolute; top: 9px; right: 15px;
-  background: none; border: none;
-  font-size: 2em; color: var(--verde-manzana-dark);
-  cursor: pointer; line-height: 1;
-  transition: color 0.2s;
-}
-.explicativo-cerrar:hover { color: var(--verde-manzana); }
-@media (max-width: 520px) {
-  .explicativo-box { padding: 1.2em 0.6em 1.5em 0.6em; font-size: .97em;}
-  .explicativo-box h2 { font-size: 1.15em;}
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var exp = document.getElementById('explicativo-flotante');
-  var btn = document.getElementById('cerrar-explicativo');
-  if(btn) btn.onclick = function() {
-    exp.classList.add('oculto');
-    setTimeout(()=>exp.style.display="none",250);
-  };
-  exp.onclick = function(e) {
-    if(e.target === exp) {
-      exp.classList.add('oculto');
-      setTimeout(()=>exp.style.display="none",250);
-    }
-  };
-  document.addEventListener('keydown', function(ev) {
-    if(ev.key === "Escape" && exp.style.display !== "none") {
-      exp.classList.add('oculto');
-      setTimeout(()=>exp.style.display="none",250);
-    }
-  });
-});
-</script>
-  <!-- NAVBAR -->
-  <nav>
-    <div class="navbar-container">
-      <div class="navbar-logo">
-        <img src="img/logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
-        <span class="navbar-title">El puesto de Juan</span>
-      </div>
-      <button class="navbar-burger" id="navbarBurger" aria-controls="navbarMenu" aria-label="Abrir menú" aria-expanded="false" tabindex="0">
-        <span class="navbar-burger-bar"></span>
-        <span class="navbar-burger-bar"></span>
-        <span class="navbar-burger-bar"></span>
-      </button>
-      <ul class="navbar-menu" id="navbarMenu">
-        <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
-        <li><a href="#productos">Listado</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a></li>
-        <li><a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-      </ul>
+<!-- NAVBAR -->
+<nav>
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="img/logo.png" alt="Logo El puesto de Juan" class="logo-sobresale">
+      <span class="navbar-title">El puesto de Juan</span>
     </div>
-  </nav>
-  <div class="container">
-    <!-- HERO -->
-    <section id="inicio">
-      <span class="hero-titulo">
-        <span class="wavy">Frutas y verduras frescas y de temporada</span>
-      </span>
-      <p>
-        Madrugamos en la huerta para llevar la mejor fruta y verdura directo a tu puerta.
-        Nos dedicamos con pasión y alegría a la cosecha diaria, para que disfrutes productos frescos, sanos y de calidad en tu mesa.
-        ¡Probá la diferencia!
-      </p>
-      <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
-    </section>
-    <!-- PRODUCTOS -->
-    <section id="productos">
-      <h2>Listado de productos</h2>
-      <div style="background:#fff3cd;color:#856404;padding:1em 1.2em;border:1.5px solid #ffeeba;border-radius:6px;margin-bottom:1.5em;max-width:500px;">
-        <i class="fa fa-database" style="color:var(--verde-manzana)"></i>
-        Los productos se gestionan <b>desde una planilla de Google Sheets</b>.<br>
-        Si deseas agregar, quitar o modificar productos, hacelo directamente en la hoja compartida.<br>
-        Los cambios aparecerán aquí automáticamente.
-      </div>
-      <div id="galeria-productos"></div>
-    </section>
-    <!-- NOSOTROS -->
-    <section id="nosotros">
-      <h2>Nosotros</h2>
-      <div class="ventajas-grid">
-        <div class="ventaja-card">
-          <img src="img/nosotros1.png" alt="Equipo de trabajo">
-          <h4>Gente de campo</h4>
-          <p>
-            Somos un equipo familiar dedicado a producir frutas y verduras frescas y de calidad.
-          </p>
-        </div>
-        <div class="ventaja-card">
-          <img src="img/nosotros2.png" alt="Confianza">
-          <h4>Venta directa</h4>
-          <p>
-            Vendemos sin intermediarios, directo de nuestra chacra a tu mesa, siempre al mejor precio.
-          </p>
-        </div>
-        <div class="ventaja-card">
-          <img src="img/nosotros3.png" alt="Productos caseros">
-          <h4>También casero</h4>
-          <p>
-            Ofrecemos dulces, conservas y productos hechos en casa, naturales y ricos.
-          </p>
-        </div>
-      </div>
-    </section>
-    <!-- CONTACTO -->
-    <section id="contacto">
-      <h2>Contacto</h2>
-      <div class="contact-row">
-        <div class="contact-info">
-          <h3>Datos de contacto</h3>
-          <ul>
-            <li>
-              <i class="fa fa-map-marker-alt" style="color:var(--verde-manzana);font-size:1.4em;"></i>
-              <a href="https://www.google.com/maps?q=-34.5272,-56.2772" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
-                Canelones, Uruguay
-              </a>
-            </li>
-            <li>
-              <i class="fa fa-phone" style="color:var(--verde-manzana-dark);font-size:1.3em;"></i>
-              <a href="tel:094691690" style="color:var(--blanco);text-decoration:underline;font-weight:600;">094 691 690</a>
-            </li>
-            <li>
-              <i class="fa fa-envelope" style="color:var(--verde-manzana);font-size:1.25em;"></i>
-              <a href="mailto:info@elpuestodejuan.com" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
-                info@elpuestodejuan.com
-              </a>
-            </li>
-            <li>
-              <i class="fab fa-whatsapp" style="color:#8afc4d;font-size:1.35em;"></i>
-              <a href="https://wa.me/59894691690" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
-                WhatsApp
-              </a>
-            </li>
-            <li>
-              <i class="fab fa-facebook-square" style="color:#8afc4d;font-size:1.35em;"></i>
-              <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
-                El puesto de Juan
-              </a>
-            </li>
-            <li>
-              <i class="fab fa-instagram" style="color:#8afc4d;font-size:1.35em;"></i>
-              <a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
-                @elpuestodejuan
-              </a>
-            </li>
-          </ul>
-          <div style="margin:18px 0 20px 0;max-width:370px;">
-            <a href="https://www.openstreetmap.org/?mlat=-34.5272&mlon=-56.2772#map=15/-34.5272/-56.2772" target="_blank" title="Ver ubicación en OpenStreetMap">
-              <iframe
-                width="360"
-                height="210"
-                frameborder="0"
-                style="border:1.5px solid var(--verde-manzana-dark);border-radius:8px;box-shadow:0 2px 10px #8afc4d44;"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-56.2872,-34.5372,-56.2672,-34.5172&layer=mapnik&marker=-34.5272,-56.2772"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                aria-label="Mapa de Canelones, Uruguay"
-              ></iframe>
-            </a>
-          </div>
-        </div>
-        <form class="contact-form" action="https://formspree.io/f/mrbkpyol" method="POST" id="contactForm">
-          <label for="nombre"><i class="fa fa-user"></i> Nombre</label>
-          <input type="text" id="nombre" name="nombre" required autocomplete="off" placeholder="Tu nombre completo">
-          <label for="email"><i class="fa fa-envelope"></i> Email</label>
-          <input type="email" id="email" name="email" required autocomplete="off" placeholder="Tu email">
-          <label for="mensaje"><i class="fa fa-comment"></i> Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
-          <button type="submit"><i class="fa fa-paper-plane"></i> Enviar mensaje</button>
-          <div id="contact-status"></div>
-        </form>
-      </div>
-    </section>
-    <footer>
-      © 2025 El puesto de Juan. Todos los derechos reservados.
-    </footer>
-  </div>
-  <!-- CARRITO flotante avanzado -->
-  <button id="cart-floating-btn" title="Ver carrito">
-    <i class="fa fa-shopping-cart"></i>
-    <span id="cart-count">0</span>
-  </button>
-  <div id="cart-panel">
-    <button id="cart-panel-close" title="Cerrar">&times;</button>
-    <h4>Carrito</h4>
-    <div id="cart-list"></div>
-    <div id="cart-total-row">
-      <span>Total:</span>
-      <span id="cart-total">$0</span>
-    </div>
-    <button id="cart-finish-btn">
-      <i class="fab fa-whatsapp"></i> Finalizar compra
+    <button class="navbar-burger" id="navbarBurger" aria-controls="navbarMenu" aria-label="Abrir menú" aria-expanded="false" tabindex="0">
+      <span class="navbar-burger-bar"></span>
+      <span class="navbar-burger-bar"></span>
+      <span class="navbar-burger-bar"></span>
     </button>
-    <form id="cart-panel-form" style="display:none;">
-      <div id="pago-step">
-        <div style="margin-bottom: 1.1em;">
-          <b style="font-size:1.13em;color:var(--verde-manzana);">Total:</b>
-          <span id="cart-total-checkout" style="font-size:1.13em;">$0</span>
-        </div>
-        <div style="margin-bottom:1.1em;">
-          <span style="font-weight:700;font-size:1.18em;color:var(--verde-manzana);display:block;margin-bottom:0.5em;">
-            ¿Cómo preferís pagar?
-          </span>
-          <label for="pago-efectivo"><input type="radio" name="pago" id="pago-efectivo" value="Efectivo" required> Efectivo</label>
-          <label for="pago-debito"><input type="radio" name="pago" id="pago-debito" value="Débito"> Débito</label>
-        </div>
-      </div>
-      <div id="datos-step" style="display:none;">
-        <input type="text" id="cart-client-name" placeholder="Tu nombre" required>
-        <input type="text" id="cart-client-location" placeholder="Tu dirección o ubicación" required>
-        <small id="location-help" style="color:var(--verde-manzana); font-size:0.96em;display:block;margin-bottom:0.4em;margin-top:0.2em;">
-          Es obligatorio indicar tu dirección o ubicación.
-        </small>
-        <button type="submit" class="cart-pay-btn">
-          <i class="fab fa-whatsapp"></i> Enviar pedido
-        </button>
-      </div>
-    </form>
+    <ul class="navbar-menu" id="navbarMenu">
+      <li><a href="#inicio" class="active"><i class="fa fa-home"></i></a></li>
+      <li><a href="#productos">Listado</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://www.facebook.com/Directo-de-la-Chacra-1950140895255116/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a></li>
+      <li><a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+    </ul>
   </div>
-  <script>
-    // Explicativo flotante: solo primera vez
-    document.addEventListener('DOMContentLoaded', function() {
-      var exp = document.getElementById('explicativo-flotante');
-      var btn = document.getElementById('cerrar-explicativo');
-      if(localStorage.getItem('explicativoVisto') === '1') {
-        exp.style.display = 'none';
-      }
-      if(btn) btn.onclick = function() {
-        exp.classList.add('oculto');
-        setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
-      };
-      exp.onclick = function(e) {
-        if(e.target === exp) {
-          exp.classList.add('oculto');
-          setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
-        }
-      };
-      document.addEventListener('keydown', function(ev) {
-        if(ev.key === "Escape" && exp.style.display !== "none") {
-          exp.classList.add('oculto');
-          setTimeout(()=>{exp.style.display="none"; localStorage.setItem('explicativoVisto','1');},250);
-        }
-      });
-    });
+</nav>
+<div class="container">
+  <!-- HERO -->
+  <section id="inicio">
+    <span class="hero-titulo">
+      <span class="wavy" id="heroTitulo">Frutas y verduras frescas y de temporada</span>
+    </span>
+    <p>
+      Madrugamos en la huerta para llevar la mejor fruta y verdura directo a tu puerta.
+      Nos dedicamos con pasión y alegría a la cosecha diaria, para que disfrutes productos frescos, sanos y de calidad en tu mesa.
+      ¡Probá la diferencia!
+    </p>
+    <img class="hero-image" src="img/portada.png" alt="Frutas y verduras frescas">
+  </section>
+  <!-- PRODUCTOS -->
+  <section id="productos">
+    <h2>Listado de productos</h2>
+    <div style="background:#fff3cd;color:#856404;padding:1em 1.2em;border:1.5px solid #ffeeba;border-radius:6px;margin-bottom:1.5em;max-width:500px;">
+      <i class="fa fa-database" style="color:var(--verde-manzana)"></i>
+      Los productos se gestionan <b>desde Google Sheets</b>.<br>
+      Puede que por momentos el stock mostrado en la página no esté actualizado.
+    </div>
+    <div id="galeria-productos"></div>
+  </section>
+  <!-- NOSOTROS -->
+  <section id="nosotros">
+    <h2>Nosotros</h2>
+    <div class="ventajas-grid">
+      <div class="ventaja-card">
+        <img src="img/nosotros1.png" alt="Equipo de trabajo">
+        <h4>Gente de campo</h4>
+        <p>
+          Somos un equipo familiar dedicado a producir frutas y verduras frescas y de calidad.
+        </p>
+      </div>
+      <div class="ventaja-card">
+        <img src="img/nosotros2.png" alt="Confianza">
+        <h4>Venta directa</h4>
+        <p>
+          Vendemos sin intermediarios, directo de nuestra chacra a tu mesa, siempre al mejor precio.
+        </p>
+      </div>
+      <div class="ventaja-card">
+        <img src="img/nosotros3.png" alt="Productos caseros">
+        <h4>También casero</h4>
+        <p>
+          Ofrecemos dulces, conservas y productos hechos en casa, naturales y ricos.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="contact-row">
+      <div class="contact-info">
+        <h3>Datos de contacto</h3>
+        <ul>
+          <li>
+            <i class="fa fa-map-marker-alt" style="color:var(--verde-manzana);font-size:1.4em;"></i>
+            <a href="https://www.google.com/maps?q=-34.5272,-56.2772" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
+              Canelones, Uruguay
+            </a>
+          </li>
+          <li>
+            <i class="fa fa-phone" style="color:var(--verde-manzana-dark);font-size:1.3em;"></i>
+            <a href="tel:094691690" style="color:var(--blanco);text-decoration:underline;font-weight:600;">094 691 690</a>
+          </li>
+          <li>
+            <i class="fa fa-envelope" style="color:var(--verde-manzana);font-size:1.25em;"></i>
+            <a href="mailto:info@elpuestodejuan.com" style="color:var(--blanco);text-decoration:underline;font-weight:600;">
+              info@elpuestodejuan.com
+            </a>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp" style="color:#8afc4d;font-size:1.35em;"></i>
+            <a href="https://wa.me/59894691690" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <i class="fab fa-facebook-square" style="color:#8afc4d;font-size:1.35em;"></i>
+            <a href="https://elpuestodjuan.github.io/puestodejuan/" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
+              El puesto de Juan
+            </a>
+          </li>
+          <li>
+            <i class="fab fa-instagram" style="color:#8afc4d;font-size:1.35em;"></i>
+            <a href="https://instagram.com/elpuestodejuan" target="_blank" rel="noopener" style="color:var(--blanco);text-decoration:none;font-weight:600;">
+              @elpuestodejuan
+            </a>
+          </li>
+        </ul>
+        <div style="margin:18px 0 20px 0;max-width:370px;">
+          <a href="https://www.openstreetmap.org/?mlat=-34.5272&mlon=-56.2772#map=15/-34.5272/-56.2772" target="_blank" title="Ver ubicación en OpenStreetMap">
+            <iframe
+              width="360"
+              height="210"
+              frameborder="0"
+              style="border:1.5px solid var(--verde-manzana-dark);border-radius:8px;box-shadow:0 2px 10px #8afc4d44;"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-56.2872,-34.5372,-56.2672,-34.5172&layer=mapnik&marker=-34.5272,-56.2772"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              aria-label="Mapa de Canelones, Uruguay"
+            ></iframe>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" action="https://formspree.io/f/mrbkpyol" method="POST" id="contactForm">
+        <label for="nombre"><i class="fa fa-user"></i> Nombre</label>
+        <input type="text" id="nombre" name="nombre" required autocomplete="off" placeholder="Tu nombre completo">
+        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+        <input type="email" id="email" name="email" required autocomplete="off" placeholder="Tu email">
+        <label for="mensaje"><i class="fa fa-comment"></i> Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
+        <button type="submit"><i class="fa fa-paper-plane"></i> Enviar mensaje</button>
+        <div id="contact-status"></div>
+      </form>
+    </div>
+  </section>
+  <footer>
+    © 2025 El puesto de Juan. Todos los derechos reservados.
+  </footer>
+</div>
+<!-- CARRITO flotante avanzado -->
+<button id="cart-floating-btn" title="Ver carrito">
+  <i class="fa fa-shopping-cart"></i>
+  <span id="cart-count">0</span>
+</button>
+<div id="cart-panel">
+  <button id="cart-panel-close" title="Cerrar">&times;</button>
+  <h4>Carrito</h4>
+  <div id="cart-list"></div>
+  <div id="cart-total-row">
+    <span>Total:</span>
+    <span id="cart-total">$0</span>
+  </div>
+  <button id="cart-finish-btn">
+    <i class="fab fa-whatsapp"></i> Finalizar compra
+  </button>
+  <form id="cart-panel-form" style="display:none;">
+    <div id="pago-step">
+      <div style="margin-bottom: 1.1em;">
+        <b style="font-size:1.13em;color:var(--verde-manzana);">Total:</b>
+        <span id="cart-total-checkout" style="font-size:1.13em;">$0</span>
+      </div>
+      <div style="margin-bottom:1.1em;">
+        <span style="font-weight:700;font-size:1.18em;color:var(--verde-manzana);display:block;margin-bottom:0.5em;">
+          ¿Cómo preferís pagar?
+        </span>
+        <label for="pago-efectivo"><input type="radio" name="pago" id="pago-efectivo" value="Efectivo" required> Efectivo</label>
+        <label for="pago-debito"><input type="radio" name="pago" id="pago-debito" value="Débito"> Débito</label>
+      </div>
+    </div>
+    <div id="datos-step" style="display:none;">
+      <input type="text" id="cart-client-name" placeholder="Tu nombre" required>
+      <input type="text" id="cart-client-location" placeholder="Tu dirección o ubicación" required>
+      <small id="location-help" style="color:var(--verde-manzana); font-size:0.96em;display:block;margin-bottom:0.4em;margin-top:0.2em;">
+        Es obligatorio indicar tu dirección o ubicación.
+      </small>
+      <button type="submit" class="cart-pay-btn">
+        <i class="fab fa-whatsapp"></i> Enviar pedido
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+  // HERO FRASE PRINCIPAL ALTERNANTE
+  const frasesHero = [
+    "Frutas y verduras frescas y de temporada",
+    "Envío gratis a partir de $300 de compra",
+    "Mas de 10 años de experiencia con la gente",
+    "Seleccionamos cada producto pensando en usted",
+    "Los mejores precios"
+  ];
+  let idxHero = 0;
+  const heroTitulo = document.getElementById('heroTitulo');
+  setInterval(() => {
+    idxHero = (idxHero + 1) % frasesHero.length;
+    heroTitulo.style.opacity = 0;
+    setTimeout(() => {
+      heroTitulo.textContent = frasesHero[idxHero];
+      heroTitulo.style.opacity = 1;
+    }, 400);
+  }, 6000);
 
-    // NAVBAR hamburguesa
-    const burger = document.getElementById('navbarBurger');
-    const menu = document.getElementById('navbarMenu');
-    burger.addEventListener('click', () => {
-      const open = burger.classList.toggle('open');
-      menu.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', open ? "true" : "false");
-      burger.setAttribute('aria-label', open ? "Cerrar menú" : "Abrir menú");
-      if(open) menu.querySelector('a').focus();
-    });
-    document.addEventListener('click', function(e){
-      if (window.innerWidth <= 900) {
-        if (!menu.contains(e.target) && !burger.contains(e.target)) {
-          burger.classList.remove('open');
-          menu.classList.remove('open');
-          burger.setAttribute('aria-expanded', "false");
-        }
+  // Explicativo flotante: solo desaparece si el usuario lo cierra manualmente
+  document.addEventListener('DOMContentLoaded', function() {
+    var exp = document.getElementById('explicativo-flotante');
+    var btn = document.getElementById('cerrar-explicativo');
+    if (btn) btn.onclick = function() {
+      exp.classList.add('oculto');
+      setTimeout(()=>exp.style.display="none",250);
+    };
+    exp.onclick = function(e) {
+      if(e.target === exp) {
+        exp.classList.add('oculto');
+        setTimeout(()=>exp.style.display="none",250);
       }
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === "Escape" && burger.classList.contains('open')) {
+    };
+  });
+
+  // NAVBAR hamburguesa
+  const burger = document.getElementById('navbarBurger');
+  const menu = document.getElementById('navbarMenu');
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? "true" : "false");
+    burger.setAttribute('aria-label', open ? "Cerrar menú" : "Abrir menú");
+    if(open) menu.querySelector('a').focus();
+  });
+  document.addEventListener('click', function(e){
+    if (window.innerWidth <= 900) {
+      if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
         menu.classList.remove('open');
         burger.setAttribute('aria-expanded', "false");
+      }
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === "Escape" && burger.classList.contains('open')) {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', "false");
+      burger.focus();
+    }
+  });
+  const menuLinks = menu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('keydown', function(e){
+      if(e.key === 'Tab' && !e.shiftKey && this === menuLinks[menuLinks.length-1] && burger.classList.contains('open')) {
+        e.preventDefault();
         burger.focus();
       }
     });
-    const menuLinks = menu.querySelectorAll('a');
-    menuLinks.forEach(link => {
-      link.addEventListener('keydown', function(e){
-        if(e.key === 'Tab' && !e.shiftKey && this === menuLinks[menuLinks.length-1] && burger.classList.contains('open')) {
-          e.preventDefault();
-          burger.focus();
-        }
-      });
-      link.addEventListener('click', function(){
-        if(window.innerWidth <= 900) {
-          burger.classList.remove('open');
-          menu.classList.remove('open');
-          burger.setAttribute('aria-expanded', "false");
-        }
-      });
+    link.addEventListener('click', function(){
+      if(window.innerWidth <= 900) {
+        burger.classList.remove('open');
+        menu.classList.remove('open');
+        burger.setAttribute('aria-expanded', "false");
+      }
     });
+  });
 
-    // Contacto AJAX
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm) {
-      contactForm.addEventListener('submit', function(ev) {
-        ev.preventDefault();
-        const status = document.getElementById('contact-status');
-        status.textContent = "Enviando...";
-        fetch(contactForm.action, {
-          method: "POST",
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' }
-        }).then(response => {
-          if(response.ok) {
-            status.textContent = "¡Mensaje enviado! Te responderemos pronto.";
-            contactForm.reset();
-          } else {
-            status.textContent = "Ocurrió un error al enviar. Intenta más tarde.";
-          }
-        }).catch(() => {
+  // Contacto AJAX
+  const contactForm = document.getElementById('contactForm');
+  if(contactForm) {
+    contactForm.addEventListener('submit', function(ev) {
+      ev.preventDefault();
+      const status = document.getElementById('contact-status');
+      status.textContent = "Enviando...";
+      fetch(contactForm.action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if(response.ok) {
+          status.textContent = "¡Mensaje enviado! Te responderemos pronto.";
+          contactForm.reset();
+        } else {
           status.textContent = "Ocurrió un error al enviar. Intenta más tarde.";
-        });
-      });
-    }
-
-    // Carrito flotante avanzado
-    let cart = [];
-    const cartBtn = document.getElementById('cart-floating-btn');
-    const cartPanel = document.getElementById('cart-panel');
-    const cartClose = document.getElementById('cart-panel-close');
-    const cartList = document.getElementById('cart-list');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cart-total');
-    const cartFinish = document.getElementById('cart-finish-btn');
-    const cartForm = document.getElementById('cart-panel-form');
-    const clientName = document.getElementById('cart-client-name');
-    const clientLocation = document.getElementById('cart-client-location');
-    const cartCheckoutTotal = document.getElementById('cart-total-checkout');
-    const pagoStep = document.getElementById('pago-step');
-    const datosStep = document.getElementById('datos-step');
-    function updateCart() {
-      cartList.innerHTML = '';
-      let total = 0, count = 0;
-      cart.forEach((item, idx) => {
-        let subtotal = item.precio * item.cantidad;
-        total += subtotal;
-        count += item.cantidad;
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        row.innerHTML = `
-          <span>
-            ${item.nombre}
-            <small style="color:var(--verde-manzana);">$${item.precio} c/u</small>
-            <small style="color:#b6ff8b;">Subt: $${subtotal}</small>
-          </span>
-          <div>
-            <button class="cart-minus" onclick="changeQty(${idx},-1)">-</button>
-            <span>${item.cantidad}</span>
-            <button class="cart-plus" onclick="changeQty(${idx},1)">+</button>
-            <button class="cart-remove" onclick="removeItem(${idx})" title="Quitar"><i class="fa fa-times"></i></button>
-          </div>
-        `;
-        cartList.appendChild(row);
-      });
-      cartCount.textContent = count;
-      cartTotal.textContent = "$" + total;
-      if(cartCheckoutTotal) cartCheckoutTotal.textContent = "$" + total;
-      cartFinish.style.display = cart.length ? "block" : "none";
-      cartForm.style.display = "none";
-      datosStep.style.display = "none";
-      pagoStep.style.display = "none";
-    }
-    function addToCart(nombre, precio) {
-      precio = Number(precio);
-      let found = cart.find(item => item.nombre === nombre);
-      if(found) found.cantidad++;
-      else cart.push({nombre, precio, cantidad:1});
-      updateCart();
-      cartBtn.classList.remove("cart-anim");
-      void cartBtn.offsetWidth;
-      cartBtn.classList.add("cart-anim");
-    }
-    function changeQty(idx, delta) {
-      cart[idx].cantidad += delta;
-      if(cart[idx].cantidad <= 0) { cart.splice(idx,1);}
-      updateCart();
-    }
-    function removeItem(idx) {
-      cart.splice(idx,1);
-      updateCart();
-    }
-    cartBtn.onclick = () => { cartPanel.style.display = "block"; }
-    cartClose.onclick = () => { cartPanel.style.display = "none"; }
-    window.addToCart = addToCart;
-    window.changeQty = changeQty;
-    window.removeItem = removeItem;
-    updateCart();
-
-    // Multi-step: pago > datos
-    cartFinish.onclick = function() {
-      if (!cart.length) return;
-      updateCart();
-      cartForm.style.display = "block";
-      cartFinish.style.display = "none";
-      pagoStep.style.display = "block";
-      datosStep.style.display = "none";
-      cartForm.querySelectorAll('input[name="pago"]').forEach(r=>r.checked=false);
-      clientName.value = "";
-      clientLocation.value = "";
-    };
-    cartForm.querySelectorAll('input[name="pago"]').forEach(function(radio) {
-      radio.addEventListener('change', function() {
-        pagoStep.style.display = "none";
-        datosStep.style.display = "block";
-        setTimeout(()=>clientName.focus(), 120);
+        }
+      }).catch(() => {
+        status.textContent = "Ocurrió un error al enviar. Intenta más tarde.";
       });
     });
+  }
 
-    cartForm.onsubmit = function(e) {
-      e.preventDefault();
-      if (!cart.length) return;
-      let nombre = clientName.value.trim();
-      let ubicacion = clientLocation.value.trim();
-      let pago = cartForm.querySelector('input[name="pago"]:checked')?.value || '';
-      if(!pago) {
-        alert("Por favor elegí una forma de pago.");
-        return;
-      }
-      if(!nombre || !ubicacion) {
-        alert("Por favor completá tu nombre y dirección o ubicación.");
-        return;
-      }
-      let pedido = `¡Hola! Quiero pedir:\n`;
-      cart.forEach(item => {
-        pedido += `- ${item.cantidad} x ${item.nombre} ($${item.precio} c/u, Subtotal $${item.precio*item.cantidad})\n`;
-      });
-      pedido += `Total: $${cart.reduce((t,i)=>t+i.precio*i.cantidad,0)}\n`;
-      pedido += `\nMi nombre: ${nombre}\nDirección/Ubicación: ${ubicacion}\nForma de pago: ${pago}\n`;
-      const url = "https://wa.me/59894691690?text=" + encodeURIComponent(pedido);
-      window.open(url, "_blank");
-      cart = [];
-      updateCart();
-      cartForm.reset();
-      cartForm.style.display = "none";
-      cartPanel.style.display = "none";
-    };
+  // Carrito flotante avanzado
+  let cart = [];
+  const cartBtn = document.getElementById('cart-floating-btn');
+  const cartPanel = document.getElementById('cart-panel');
+  const cartClose = document.getElementById('cart-panel-close');
+  const cartList = document.getElementById('cart-list');
+  const cartCount = document.getElementById('cart-count');
+  const cartTotal = document.getElementById('cart-total');
+  const cartFinish = document.getElementById('cart-finish-btn');
+  const cartForm = document.getElementById('cart-panel-form');
+  const clientName = document.getElementById('cart-client-name');
+  const clientLocation = document.getElementById('cart-client-location');
+  const cartCheckoutTotal = document.getElementById('cart-total-checkout');
+  const pagoStep = document.getElementById('pago-step');
+  const datosStep = document.getElementById('datos-step');
+  function updateCart() {
+    cartList.innerHTML = '';
+    let total = 0, count = 0;
+    cart.forEach((item, idx) => {
+      let subtotal = item.precio * item.cantidad;
+      total += subtotal;
+      count += item.cantidad;
+      const row = document.createElement('div');
+      row.className = 'item-row';
+      row.innerHTML = `
+        <span>
+          ${item.nombre}
+          <small style="color:var(--verde-manzana);">$${item.precio} c/u</small>
+          <small style="color:#b6ff8b;">Subt: $${subtotal}</small>
+        </span>
+        <div>
+          <button class="cart-minus" onclick="changeQty(${idx},-1)">-</button>
+          <span>${item.cantidad}</span>
+          <button class="cart-plus" onclick="changeQty(${idx},1)">+</button>
+          <button class="cart-remove" onclick="removeItem(${idx})" title="Quitar"><i class="fa fa-times"></i></button>
+        </div>
+      `;
+      cartList.appendChild(row);
+    });
+    cartCount.textContent = count;
+    cartTotal.textContent = "$" + total;
+    if(cartCheckoutTotal) cartCheckoutTotal.textContent = "$" + total;
+    cartFinish.style.display = cart.length ? "block" : "none";
+    cartForm.style.display = "none";
+    datosStep.style.display = "none";
+    pagoStep.style.display = "none";
+  }
+  function addToCart(nombre, precio) {
+    precio = Number(precio);
+    let found = cart.find(item => item.nombre === nombre);
+    if(found) found.cantidad++;
+    else cart.push({nombre, precio, cantidad:1});
+    updateCart();
+    cartBtn.classList.remove("cart-anim");
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add("cart-anim");
+  }
+  function changeQty(idx, delta) {
+    cart[idx].cantidad += delta;
+    if(cart[idx].cantidad <= 0) { cart.splice(idx,1);}
+    updateCart();
+  }
+  function removeItem(idx) {
+    cart.splice(idx,1);
+    updateCart();
+  }
+  cartBtn.onclick = () => { cartPanel.style.display = "block"; }
+  cartClose.onclick = () => { cartPanel.style.display = "none"; }
+  window.addToCart = addToCart;
+  window.changeQty = changeQty;
+  window.removeItem = removeItem;
+  updateCart();
 
-    // Productos desde Google Sheets
-    const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-3gs5qzWpdvrI6kGzbqYTXKGIXZvzZdmI_gIvsbthekxpYamA-IP3NdqWgPzmLqFF5U56AN7kA80e/pub?gid=1824323229&single=true&output=csv';
-    fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(csvURL))
-      .then(response => response.text())
-      .then(csv => {
-        const rows = [];
-        let insideQuotes = false, row = [], cell = '';
-        for (let i = 0; i < csv.length; i++) {
-          const char = csv[i], next = csv[i+1];
-          if(char === '"' && insideQuotes && next === '"') { cell += '"'; i++; }
-          else if(char === '"') insideQuotes = !insideQuotes;
-          else if(char === ',' && !insideQuotes) { row.push(cell); cell = ''; }
-          else if((char === '\n' || char === '\r') && !insideQuotes) {
-            if(cell || row.length>0) { row.push(cell); rows.push(row); cell = ''; row=[]; }
-            if(char === '\r' && next === '\n') i++;
-          }
-          else cell += char;
-        }
-        if(cell || row.length>0) { row.push(cell); rows.push(row); }
-        const headers = rows[0].map(h=>h.trim().toLowerCase());
-        const productos = rows.slice(1).map(fila => {
-          let obj = {};
-          fila.forEach((valor, i) => obj[headers[i]] = valor ? valor.trim() : '');
-          return obj;
-        });
-        renderGaleria(productos);
-      })
-      .catch(err => {
-        document.getElementById('galeria-productos').innerHTML = '<p>No se pudieron cargar los productos.</p>';
-        console.error(err);
-      });
+  // Multi-step: pago > datos
+  cartFinish.onclick = function() {
+    if (!cart.length) return;
+    updateCart();
+    cartForm.style.display = "block";
+    cartFinish.style.display = "none";
+    pagoStep.style.display = "block";
+    datosStep.style.display = "none";
+    cartForm.querySelectorAll('input[name="pago"]').forEach(r=>r.checked=false);
+    clientName.value = "";
+    clientLocation.value = "";
+  };
+  cartForm.querySelectorAll('input[name="pago"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      pagoStep.style.display = "none";
+      datosStep.style.display = "block";
+      setTimeout(()=>clientName.focus(), 120);
+    });
+  });
 
-    function renderGaleria(productos) {
-      const galeria = document.getElementById('galeria-productos');
-      galeria.innerHTML = '';
-      productos.forEach(producto => {
-        if (producto.activo && producto.activo.replace(/[\s\u00a0]/g,'').toLowerCase() !== 'sí') return;
-        const card = document.createElement('div');
-        card.className = 'producto-card';
-        card.innerHTML = `
-          <img src="${producto.imagen}" alt="${producto.nombre}">
-          <h3>${producto.nombre}</h3>
-          <span class="precio">$${producto.precio}</span>
-          <p class="comentarios">${producto.comentarios || ''}</p>
-          <button class="agregar-btn" onclick="addToCart('${producto.nombre}', ${producto.precio})">
-            <i class="fa fa-cart-plus"></i>Agregar
-          </button>
-        `;
-        galeria.appendChild(card);
-      });
+  cartForm.onsubmit = function(e) {
+    e.preventDefault();
+    if (!cart.length) return;
+    let nombre = clientName.value.trim();
+    let ubicacion = clientLocation.value.trim();
+    let pago = cartForm.querySelector('input[name="pago"]:checked')?.value || '';
+    if(!pago) {
+      alert("Por favor elegí una forma de pago.");
+      return;
     }
-  </script>
+    if(!nombre || !ubicacion) {
+      alert("Por favor completá tu nombre y dirección o ubicación.");
+      return;
+    }
+    let pedido = `¡Hola! Quiero pedir:\n`;
+    cart.forEach(item => {
+      pedido += `- ${item.cantidad} x ${item.nombre} ($${item.precio} c/u, Subtotal $${item.precio*item.cantidad})\n`;
+    });
+    pedido += `Total: $${cart.reduce((t,i)=>t+i.precio*i.cantidad,0)}\n`;
+    pedido += `\nMi nombre: ${nombre}\nDirección/Ubicación: ${ubicacion}\nForma de pago: ${pago}\n`;
+    const url = "https://wa.me/59894691690?text=" + encodeURIComponent(pedido);
+    window.open(url, "_blank");
+    cart = [];
+    updateCart();
+    cartForm.reset();
+    cartForm.style.display = "none";
+    cartPanel.style.display = "none";
+  };
+
+  // Productos desde Google Sheets
+  const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-3gs5qzWpdvrI6kGzbqYTXKGIXZvzZdmI_gIvsbthekxpYamA-IP3NdqWgPzmLqFF5U56AN7kA80e/pub?gid=1824323229&single=true&output=csv';
+  fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(csvURL))
+    .then(response => response.text())
+    .then(csv => {
+      const rows = [];
+      let insideQuotes = false, row = [], cell = '';
+      for (let i = 0; i < csv.length; i++) {
+        const char = csv[i], next = csv[i+1];
+        if(char === '"' && insideQuotes && next === '"') { cell += '"'; i++; }
+        else if(char === '"') insideQuotes = !insideQuotes;
+        else if(char === ',' && !insideQuotes) { row.push(cell); cell = ''; }
+        else if((char === '\n' || char === '\r') && !insideQuotes) {
+          if(cell || row.length>0) { row.push(cell); rows.push(row); cell = ''; row=[]; }
+          if(char === '\r' && next === '\n') i++;
+        }
+        else cell += char;
+      }
+      if(cell || row.length>0) { row.push(cell); rows.push(row); }
+      const headers = rows[0].map(h=>h.trim().toLowerCase());
+      const productos = rows.slice(1).map(fila => {
+        let obj = {};
+        fila.forEach((valor, i) => obj[headers[i]] = valor ? valor.trim() : '');
+        return obj;
+      });
+      renderGaleria(productos);
+    })
+    .catch(err => {
+      document.getElementById('galeria-productos').innerHTML = '<p>No se pudieron cargar los productos.</p>';
+      console.error(err);
+    });
+
+  function renderGaleria(productos) {
+    const galeria = document.getElementById('galeria-productos');
+    galeria.innerHTML = '';
+    productos.forEach(producto => {
+      if (producto.activo && producto.activo.replace(/[\s\u00a0]/g,'').toLowerCase() !== 'sí') return;
+      const card = document.createElement('div');
+      card.className = 'producto-card';
+      card.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <h3>${producto.nombre}</h3>
+        <span class="precio">$${producto.precio}</span>
+        <p class="comentarios">${producto.comentarios || ''}</p>
+        <button class="agregar-btn" onclick="addToCart('${producto.nombre}', ${producto.precio})">
+          <i class="fa fa-cart-plus"></i>Agregar
+        </button>
+      `;
+      galeria.appendChild(card);
+    });
+  }
+</script>
 </body>
 </html>
